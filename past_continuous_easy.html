@@ -2,7 +2,7 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Premium 50 Test - Luxury Edition</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800&display=swap');
@@ -24,7 +24,6 @@ body {
   background: #0a1f1a;
 }
 
-/* Animated Gradient Background */
 .gradient-bg {
   position: fixed;
   top: 0;
@@ -42,7 +41,6 @@ body {
   50% { background-position: 100% 50%; }
 }
 
-/* Floating Orbs */
 .orbs-container {
   position: fixed;
   top: 0;
@@ -73,7 +71,6 @@ body {
   75% { transform: translate(40px, 20px) rotate(270deg) scale(1.05); }
 }
 
-/* Glassmorphism Container */
 .main-wrapper {
   display: flex;
   justify-content: center;
@@ -120,7 +117,6 @@ body {
   100% { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-/* Header */
 .header {
   text-align: center;
   margin-bottom: 30px;
@@ -167,7 +163,6 @@ body {
   letter-spacing: 1px;
 }
 
-/* Progress Bar */
 .progress-bar {
   width: 100%;
   height: 10px;
@@ -218,7 +213,6 @@ body {
   to { opacity: 1; transform: scaleX(1); }
 }
 
-/* Text */
 #uzbek-text {
   font-size: 1.5em;
   font-weight: 800;
@@ -252,7 +246,6 @@ body {
   to { opacity: 1; }
 }
 
-/* Back Button */
 .back-btn {
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(15px);
@@ -288,7 +281,6 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Drop Zone */
 .drop-zone {
   min-height: 100px;
   background: rgba(255, 255, 255, 0.05);
@@ -335,7 +327,6 @@ body {
   50% { opacity: 1; }
 }
 
-/* Words Container */
 .words-container {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 24px;
@@ -357,7 +348,6 @@ body {
   justify-content: center;
 }
 
-/* Word Blocks */
 .word-block {
   padding: 14px 24px;
   background: rgba(255, 255, 255, 0.95);
@@ -457,7 +447,6 @@ body {
   90% { transform: translateX(-2px) rotate(0deg); }
 }
 
-/* Loading Spinner */
 .loading {
   position: absolute;
   top: 50%;
@@ -470,6 +459,7 @@ body {
   border-radius: 50%;
   animation: spin 1s linear infinite;
   box-shadow: 0 0 20px rgba(82, 217, 153, 0.5);
+  z-index: 10;
 }
 
 @keyframes spin {
@@ -477,7 +467,6 @@ body {
   100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* Result Modal */
 .result-modal {
   position: fixed;
   top: 0;
@@ -615,7 +604,6 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Mobile Responsive */
 @media (max-width: 480px) {
   body { padding: 10px; }
   .container { padding: 28px 20px; border-radius: 28px; }
@@ -731,11 +719,6 @@ const tests = [
   {uz: "U stol ustida yozayotgan edi", en: ["He", "was", "writing", "on", "the", "table"]}
 ];
 
-
-
-
-
-
 let currentTest = 0;
 let score = 0;
 let totalWords = 0;
@@ -743,14 +726,21 @@ let isChecking = false;
 let selectedWords = [];
 let currentCorrectSentence = '';
 let voices = [];
-
-function init() {
-  loadVoices();
-  loadTest();
-}
+let audioInitialized = false;
 
 function loadVoices() {
-  voices = speechSynthesis.getVoices();
+  return new Promise((resolve) => {
+    voices = speechSynthesis.getVoices();
+    if (voices.length > 0) {
+      resolve();
+    } else {
+      speechSynthesis.onvoiceschanged = () => {
+        voices = speechSynthesis.getVoices();
+        resolve();
+      };
+      setTimeout(resolve, 1000);
+    }
+  });
 }
 
 function detectLang(text) {
@@ -758,22 +748,46 @@ function detectLang(text) {
   return "uz-UZ";
 }
 
-function playCurrentSentence() {
-  if (currentCorrectSentence) {
-    const utterance = new SpeechSynthesisUtterance(currentCorrectSentence);
-    const lang = detectLang(currentCorrectSentence);
-    utterance.lang = lang;
-    utterance.pitch = 1.1;
-    utterance.rate = 0.98;
-    utterance.volume = 1;
-    const voice = voices.find(v => v.lang.startsWith(lang));
-    if (voice) utterance.voice = voice;
-    speechSynthesis.speak(utterance);
-  }
+function speakText(text) {
+  return new Promise((resolve) => {
+    speechSynthesis.cancel();
+    
+    setTimeout(() => {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const lang = detectLang(text);
+      utterance.lang = lang;
+      utterance.pitch = 1.0;
+      utterance.rate = 0.8;
+      utterance.volume = 1;
+      
+      const voiceLang = lang.split('-')[0];
+      const voice = voices.find(v => v.lang.startsWith(voiceLang)) || 
+                   voices.find(v => v.lang.includes(voiceLang));
+      if (voice) utterance.voice = voice;
+      
+      utterance.onend = () => {
+        setTimeout(resolve, 100);
+      };
+      utterance.onerror = () => {
+        resolve();
+      };
+      
+      speechSynthesis.speak(utterance);
+    }, 150);
+  });
+}
+
+async function init() {
+  await loadVoices();
+  loadTest();
 }
 
 function loadTest() {
-  if (currentTest >= tests.length) { showFinalResult(); return; }
+  if (currentTest >= tests.length) { 
+    showFinalResult(); 
+    return; 
+  }
+  
   const test = tests[currentTest];
   currentCorrectSentence = test.en.join(' ');
   document.getElementById('uzbek-text').textContent = test.uz;
@@ -782,11 +796,13 @@ function loadTest() {
   document.getElementById('feedback').textContent = '';
   selectedWords = [];
   isChecking = false;
+  
   const dropZone = document.getElementById('dropZone');
   const wordsGrid = document.getElementById('wordsGrid');
   dropZone.innerHTML = '';
   dropZone.classList.add('drop-zone-empty');
   wordsGrid.innerHTML = '';
+  
   const shuffledWords = [...test.en].sort(() => Math.random() - 0.5);
   shuffledWords.forEach((word, index) => {
     const wordDiv = document.createElement('div');
@@ -801,7 +817,12 @@ function loadTest() {
 function selectWord(wordElement, word) {
   if (isChecking) return;
   if (navigator.vibrate) navigator.vibrate(25);
-  if (selectedWords.includes(word)) { removeWord(word); return; }
+  
+  if (selectedWords.includes(word)) { 
+    removeWord(word); 
+    return; 
+  }
+  
   selectedWords.push(word);
   const dropZone = document.getElementById('dropZone');
   const wordCopy = document.createElement('div');
@@ -810,65 +831,93 @@ function selectWord(wordElement, word) {
   wordCopy.onclick = () => removeWord(word);
   dropZone.appendChild(wordCopy);
   dropZone.classList.remove('drop-zone-empty');
+  
   wordElement.style.opacity = '0.35';
   wordElement.style.pointerEvents = 'none';
+  
   const correctOrder = tests[currentTest].en;
-  if (selectedWords.length === correctOrder.length) { setTimeout(checkAnswer, 450); }
+  if (selectedWords.length === correctOrder.length) { 
+    setTimeout(checkAnswer, 450); 
+  }
 }
 
 function removeWord(word) {
   if (isChecking) return;
   if (navigator.vibrate) navigator.vibrate(25);
+  
   const index = selectedWords.indexOf(word);
   if (index > -1) selectedWords.splice(index, 1);
+  
   const dropZone = document.getElementById('dropZone');
   const dropWords = dropZone.querySelectorAll('.word-block');
-  dropWords.forEach(el => { if (el.textContent === word) el.remove(); });
+  dropWords.forEach(el => { 
+    if (el.textContent === word) el.remove(); 
+  });
+  
   if (selectedWords.length === 0) dropZone.classList.add('drop-zone-empty');
+  
   const wordsGrid = document.getElementById('wordsGrid');
   const originalWords = wordsGrid.querySelectorAll('.word-block');
-  originalWords.forEach(el => { if (el.textContent === word) { el.style.opacity = '1'; el.style.pointerEvents = 'auto'; } });
+  originalWords.forEach(el => { 
+    if (el.textContent === word) { 
+      el.style.opacity = '1'; 
+      el.style.pointerEvents = 'auto'; 
+    } 
+  });
 }
 
 function checkAnswer() {
   if (isChecking) return;
   isChecking = true;
+  
   const dropZone = document.getElementById('dropZone');
   const loading = document.createElement('div');
   loading.className = 'loading';
   dropZone.appendChild(loading);
+  
   setTimeout(() => {
     loading.remove();
     const correctOrder = tests[currentTest].en;
     let correctWords = 0;
-    const dropWords = dropZone.querySelectorAll('.word-block');
+    const dropWords = Array.from(dropZone.querySelectorAll('.word-block')).filter(el => !el.classList.contains('loading'));
+    
     dropWords.forEach((el, index) => {
       setTimeout(() => {
-        if (el.textContent === correctOrder[index]) { el.className = 'word-block correct'; correctWords++; }
-        else { el.className = 'word-block wrong'; }
+        if (el.textContent === correctOrder[index]) { 
+          el.className = 'word-block correct'; 
+          correctWords++; 
+        } else { 
+          el.className = 'word-block wrong'; 
+        }
         if (navigator.vibrate) navigator.vibrate(18);
       }, index * 90);
     });
-    setTimeout(() => {
+    
+    setTimeout(async () => {
       const isCorrect = correctWords === correctOrder.length && selectedWords.length === correctOrder.length;
       const feedback = document.getElementById('feedback');
+      
       if (isCorrect) {
         feedback.textContent = "🎉 Ajoyib! Keyingisiga o'tamiz!";
         feedback.style.color = '#52d999';
         score += correctOrder.length;
         if (navigator.vibrate) navigator.vibrate([70,30,70]);
+        
         const correctSentence = correctOrder.join(' ');
-        const utterance = new SpeechSynthesisUtterance(correctSentence);
-        const lang = detectLang(correctSentence);
-        utterance.lang = lang; utterance.pitch = 1.1; utterance.rate = 0.98; utterance.volume = 1;
-        const voice = voices.find(v => v.lang.startsWith(lang)); if (voice) utterance.voice = voice;
-        speechSynthesis.speak(utterance);
-        setTimeout(() => { currentTest++; loadTest(); }, 1800);
+        await speakText(correctSentence);
+        
+        setTimeout(() => { 
+          currentTest++; 
+          loadTest(); 
+        }, 600);
       } else {
         feedback.textContent = `❌ Xato! ${correctWords}/${correctOrder.length} to'g'ri. Qayta urinib ko'ring`;
         feedback.style.color = '#ff6b6b';
         if (navigator.vibrate) navigator.vibrate([140,60,140]);
-        setTimeout(() => { loadTest(); }, 1400);
+        
+        setTimeout(() => { 
+          loadTest(); 
+        }, 1400);
       }
       totalWords += correctOrder.length;
     }, dropWords.length * 90 + 350);
@@ -883,36 +932,72 @@ function showFinalResult() {
   else if (percentage >= 70) starCount = 3;
   else if (percentage >= 60) starCount = 2;
   else if (percentage >= 50) starCount = 1;
+  
   document.getElementById('finalScore').textContent = `${score}/${totalWords}`;
   document.getElementById('finalPercentage').textContent = `${percentage}% to'g'ri javob`;
+  
   const starsEl = document.getElementById('stars');
   starsEl.innerHTML = '';
   for (let i = 0; i < 5; i++) {
     const star = document.createElement('span');
-    star.className = 'star'; star.textContent = '⭐';
+    star.className = 'star'; 
+    star.textContent = '⭐';
     if (i < starCount) {
-      setTimeout(() => { star.classList.add('filled'); if (navigator.vibrate) navigator.vibrate(36); }, i * 120);
+      setTimeout(() => { 
+        star.classList.add('filled'); 
+        if (navigator.vibrate) navigator.vibrate(36); 
+      }, i * 120);
     }
     starsEl.appendChild(star);
   }
+  
   document.getElementById('resultModal').style.display = 'flex';
-  if (navigator.vibrate) { setTimeout(() => { navigator.vibrate([180,100,180]); }, 500); }
+  if (navigator.vibrate) { 
+    setTimeout(() => { 
+      navigator.vibrate([180,100,180]); 
+    }, 500); 
+  }
 }
 
 function restartTest() {
-  currentTest = 0; score = 0; totalWords = 0; selectedWords = []; document.getElementById('resultModal').style.display = 'none'; loadTest();
+  currentTest = 0; 
+  score = 0; 
+  totalWords = 0; 
+  selectedWords = []; 
+  document.getElementById('resultModal').style.display = 'none'; 
+  loadTest();
 }
 
 let lastTouchEnd = 0;
 document.addEventListener('touchend', function (event) {
-  var now = (new Date()).getTime();
+  const now = (new Date()).getTime();
   if (now - lastTouchEnd <= 300) event.preventDefault();
   lastTouchEnd = now;
 }, false);
-document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
 
-speechSynthesis.onvoiceschanged = loadVoices;
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('contextmenu', function(e) { 
+  e.preventDefault(); 
+});
+window.addEventListener('DOMContentLoaded', init);
+document.addEventListener('touchstart', function initAudio() {
+  if (!audioInitialized) {
+    audioInitialized = true;
+    loadVoices();
+    const utterance = new SpeechSynthesisUtterance('');
+    utterance.volume = 0;
+    speechSynthesis.speak(utterance);
+  }
+}, { once: true });
+
+document.addEventListener('click', function initAudio() {
+  if (!audioInitialized) {
+    audioInitialized = true;
+    loadVoices();
+  }
+}, { once: true });
+
 </script>
 </body>
 </html>
+
+
