@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Premium 50 Test - Container</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 15px;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  position: relative;
+}
+
+/* Animated Background */
+.background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  background: linear-gradient(135deg, #f093fb 0%, #dc102bff 25%, #4facfe 50%, #00f2fe 75%, #43e97b 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Floating Particles */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.particle {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: float 25s infinite ease-in-out;
+}
+
+.particle:nth-child(1) { width: 60px; height: 60px; top: 15%; left: 15%; animation-delay: 0s; }
+.particle:nth-child(2) { width: 80px; height: 80px; top: 25%; right: 25%; animation-delay: -8s; }
+.particle:nth-child(3) { width: 40px; height: 40px; bottom: 35%; left: 35%; animation-delay: -16s; }
+.particle:nth-child(4) { width: 70px; height: 70px; bottom: 25%; right: 15%; animation-delay: -24s; }
+
+/* Main Container Wrapper */
+.main-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: calc(100vh - 30px);
+  padding: 20px 0;
+}
+
+.container {
+  max-width: 500px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 25px 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  border: 1px solid rgba(255,255,255,0.2);
+  animation: slideUp 0.8s ease-out;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.test-counter {
+  background: linear-gradient(135deg, #ff6b6b, #ffa500);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 20px;
+  display: inline-block;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+  animation: slideUp 0.8s ease-out 0.2s both;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
+  margin: 20px 0;
+  overflow: hidden;
+  animation: slideUp 0.8s ease-out 0.4s both;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+  border-radius: 10px;
+  transition: width 0.8s ease;
+  width: 0%;
+  box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+}
+
+#uzbek-text {
+  font-size: 1.4em;
+  font-weight: 800;
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  line-height: 1.3;
+  animation: slideUp 0.8s ease-out 0.6s both;
+}
+
+#feedback {
+  font-size: 1.1em;
+  font-weight: 600;
+  text-align: center;
+  min-height: 35px;
+  margin: 20px 0;
+  animation: slideUp 0.8s ease-out 0.8s both;
+}
+
+.back-btn {
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 25px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  margin: 0 auto 25px auto;
+  display: block;
+  width: 140px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+  animation: slideUp 0.8s ease-out 1.0s both;
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(78, 205, 196, 0.4);
+}
+
+.back-btn:active {
+  transform: translateY(0);
+}
+
+.drop-zone {
+  min-height: 90px;
+  background: rgba(255,255,255,0.1);
+  border: 2px dashed rgba(255,255,255,0.4);
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: all 0.3s ease;
+  animation: slideUp 0.8s ease-out 1.2s both;
+}
+
+.drop-zone:not(.drop-zone-empty) {
+  border-color: rgba(78, 205, 196, 0.6);
+  background: rgba(78, 205, 196, 0.1);
+}
+
+.drop-zone-empty::before {
+  content: 'So\'zlarni tartib bilan joylang';
+  color: rgba(255,255,255,0.7);
+  font-size: 15px;
+  font-weight: 500;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+}
+
+/* Audio controls */
+.audio-controls {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 100;
+}
+
+.audio-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.audio-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.audio-btn:active {
+  transform: scale(0.95);
+}
+
+.hidden-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.words-container {
+  background: rgba(255,255,255,0.1);
+  border-radius: 18px;
+  padding: 20px;
+  border: 1px solid rgba(255,255,255,0.2);
+  animation: slideUp 0.8s ease-out 1.4s both;
+}
+
+.words-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.word-block {
+  padding: 14px 22px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px;
+  color: #333;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+  min-width: 65px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.word-block:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+.word-block:active {
+  transform: scale(0.95);
+}
+
+.word-block.selected {
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+  color: white;
+  transform: scale(1.02);
+  box-shadow: 0 8px 25px rgba(78, 205, 196, 0.4);
+}
+
+.word-block.correct {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+  animation: correct-bounce 0.5s ease-out;
+  box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+}
+
+.word-block.wrong {
+  background: linear-gradient(135deg, #dc3545, #fd7e7e);
+  color: white;
+  animation: wrong-shake 0.5s ease-out;
+  box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
+}
+
+@keyframes correct-bounce {
+  0% { transform: scale(1.02); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1.08); }
+}
+
+@keyframes wrong-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-8px); }
+  80% { transform: translateX(8px); }
+}
+
+.result-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(10px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.result-content {
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 35px 30px;
+  text-align: center;
+  max-width: 380px;
+  width: 100%;
+  border: 1px solid rgba(255,255,255,0.3);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  animation: modalSlide 0.5s ease-out;
+}
+
+.result-content h2 {
+  font-size: 1.8em;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.result-score {
+  font-size: 2.4em;
+  font-weight: 900;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 20px 0;
+}
+
+.result-percentage {
+  font-size: 1.3em;
+  color: #666;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.stars {
+  font-size: 2em;
+  margin: 20px 0;
+}
+
+.star {
+  color: #ddd;
+  margin: 0 3px;
+  transition: color 0.3s ease;
+}
+
+.star.filled {
+  color: #ffd700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.retry-btn {
+  background: linear-gradient(135deg, #ffa500, #ff6b6b);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 165, 0, 0.3);
+}
+
+.retry-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 165, 0, 0.4);
+}
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-top: 3px solid #4ecdc4;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Animations */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.4;
+  }
+  33% {
+    transform: translateY(-30px) rotate(120deg);
+    opacity: 0.8;
+  }
+  66% {
+    transform: translateY(-15px) rotate(240deg);
+    opacity: 0.6;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes modalSlide {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.level-badge {
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 15px;
+  font-weight: 700;
+  font-size: 10px;
+  margin-left: 8px;
+}
+
+/* Mobile optimizations */
+@media (max-width: 480px) {
+  body { padding: 10px; }
+  .main-wrapper { padding: 10px 0; }
+  .container { 
+    padding: 20px 15px; 
+    border-radius: 20px;
+  }
+  #uzbek-text { font-size: 1.25em; }
+  .word-block { 
+    padding: 12px 18px; 
+    font-size: 14px; 
+  }
+  .back-btn {
+    width: 120px;
+    padding: 12px 24px;
+  }
+  .result-content {
+    padding: 30px 25px;
+    border-radius: 20px;
+  }
+}
+
+@media (max-width: 360px) {
+  .container { padding: 18px 12px; }
+  .words-grid { gap: 8px; }
+  .word-block { 
+    padding: 10px 16px; 
+    font-size: 13px; 
+    min-width: 55px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Animated Background -->
+<div class="background-container"></div>
+
+<!-- Floating Particles -->
+<div class="particles">
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+</div>
+
+<div class="main-wrapper">
+  <div class="container">
+    <div class="header">
+      <div class="test-counter">
+      Test <span id="currentTest">1</span> / 50
+      <span class="level-badge">LEVEL 1</span>
+    </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div id="uzbek-text">Loading...</div>
+      <div id="feedback"></div>
+    </div>
+
+    <button class="back-btn" onclick="window.history.back()">← Menu</button>
+
+    <div class="drop-zone drop-zone-empty" id="dropZone"></div>
+    
+    <div class="words-container">
+      <div class="words-grid" id="wordsGrid">
+        <!-- So'zlar bu yerda paydo bo'ladi -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="result-modal" id="resultModal">
+  <div class="result-content">
+    <h2>🎉 Test yakunlandi!</h2>
+    <div class="result-score" id="finalScore"></div>
+    <div class="result-percentage" id="finalPercentage"></div>
+    <div class="stars" id="stars"></div>
+    <button class="retry-btn" onclick="restartTest()">Qayta topshirish</button><br>
+    <button class="back-btn" onclick="window.history.back()">← Menu</button>
+  </div>
+</div>
+
+<script>
+const tests = [
+  {uz: "Men kitob o'qiyman", en: ["I", "read", "a", "book"]},   
+  {uz: "U maktabga ketmoqda", en: ["He", "is", "going", "to", "school"]},
+  {uz: "Bugun ob-havo yaxshi", en: ["The", "weather", "is", "good", "today"]},
+  {uz: "Men choy ichyapman", en: ["I", "am", "drinking", "tea"]},
+  {uz: "U film tomosha qildi", en: ["He", "watched", "a", "movie"]},
+  {uz: "Men yangi mashina sotib oldim", en: ["I", "bought", "a", "new", "car"]},
+  {uz: "Sen yaxshi o'qiding", en: ["You", "studied", "well"]},
+  {uz: "Men osh pishiryapman", en: ["I", "am", "cooking", "pilaf"]},
+  {uz: "Bu mening itim", en: ["This", "is", "my", "dog"]},
+  {uz: "U kitob yozmoqda", en: ["He", "is", "writing", "a", "book"]},
+  {uz: "Biz parkda sayr qildik", en: ["We", "walked", "in", "the", "park"]},
+  {uz: "Ona taomlaydi", en: ["Mother", "is", "cooking"]},
+  {uz: "Bolalar o'ynayapti", en: ["Children", "are", "playing"]},
+  {uz: "Men uyga keldim", en: ["I", "came", "home"]},
+  {uz: "U darsga tayyorlanmoqda", en: ["He", "is", "preparing", "for", "lessons"]},
+  {uz: "Havo yomg'irli", en: ["It", "is", "rainy"]},
+  {uz: "Men ishga ketyapman", en: ["I", "am", "going", "to", "work"]},
+  {uz: "U musiqa tinglaydi", en: ["He", "listens", "to", "music"]},
+  {uz: "Biz do'stlar bilan uchrashdik", en: ["We", "met", "with", "friends"]},
+  {uz: "Men yangi telefon oldim", en: ["I", "got", "a", "new", "phone"]},
+  {uz: "U sport bilan shug'ullanadi", en: ["He", "does", "sports"]},
+  {uz: "Men ertalab mashq qilaman", en: ["I", "exercise", "in", "the", "morning"]},
+  {uz: "U inglizcha o'rganmoqda", en: ["He", "is", "learning", "English"]},
+  {uz: "Biz teatrga bordik", en: ["We", "went", "to", "the", "theater"]},
+  {uz: "Men xat yozyapman", en: ["I", "am", "writing", "a", "letter"]},
+  {uz: "U rasm chizdi", en: ["He", "drew", "a", "picture"]},
+  {uz: "Biz sayohatga chiqamiz", en: ["We", "will", "go", "on", "a", "trip"]},
+  {uz: "Men ovqat tayyorlayapman", en: ["I", "am", "preparing", "food"]},
+  {uz: "U compyuterda ishlaydi", en: ["He", "works", "on", "the", "computer"]},
+  {uz: "Biz futbol o'ynadik", en: ["We", "played", "football"]},
+  {uz: "Men dala ishlarini qilaman", en: ["I", "do", "household", "chores"]},
+  {uz: "U yangiliklar ko'rmoqda", en: ["He", "is", "watching", "news"]},
+  {uz: "Biz magazinga bordik", en: ["We", "went", "to", "the", "store"]},
+  {uz: "Men darsga kechikdim", en: ["I", "was", "late", "for", "class"]},
+  {uz: "U shifoxonada ishlaydi", en: ["He", "works", "at", "the", "hospital"]},
+  {uz: "Biz bog'da sayr qildik", en: ["We", "walked", "in", "the", "garden"]},
+  {uz: "Men kitobxonada o'qiyman", en: ["I", "read", "in", "the", "library"]},
+  {uz: "U mashinasini yuvmoqda", en: ["He", "is", "washing", "his", "car"]},
+  {uz: "Biz konsertga bordik", en: ["We", "went", "to", "a", "concert"]},
+  {uz: "Men ijodiy ish qilaman", en: ["I", "do", "creative", "work"]},
+  {uz: "U matematikani o'rgatadi", en: ["He", "teaches", "mathematics"]},
+  {uz: "Biz muzeyga tashrif buyurdik", en: ["We", "visited", "the", "museum"]},
+  {uz: "Men tadbirkorlikni o'rganaman", en: ["I", "study", "entrepreneurship"]},
+  {uz: "U yangi uy qurmoqda", en: ["He", "is", "building", "a", "new", "house"]},
+  {uz: "Biz tog'larga chiqamiz", en: ["We", "will", "climb", "the", "mountains"]},
+  {uz: "Men zamonaviy texnologiyani o'rganaman", en: ["I", "study", "modern", "technology"]},
+  {uz: "U xalqaro konferensiyada qatnashdi", en: ["He", "participated", "in", "an", "international", "conference"]},
+  {uz: "Biz ekologik loyihada ishlaymiz", en: ["We", "work", "on", "an", "ecological", "project"]},
+  {uz: "Men sun'iy intellektni tadqiq qilaman", en: ["I", "research", "artificial", "intelligence"]},
+  {uz: "U global iqtisodiyotni tahlil qilmoqda", en: ["He", "is", "analyzing", "the", "global", "economy"]}
+];
+
+let currentTest = 0;
+let score = 0;
+let totalWords = 0;
+let isChecking = false;
+let selectedWords = [];
+let currentCorrectSentence = '';
+let voices = [];
+
+function init() {
+  loadVoices();
+  loadTest();
+}
+
+function loadVoices() {
+  voices = speechSynthesis.getVoices();
+}
+
+function detectLang(text) {
+  if (/[a-z]/i.test(text)) return "en-US"; // inglizcha
+  return "uz-UZ"; // default o'zbekcha
+}
+
+function playCurrentSentence() {
+  if (currentCorrectSentence) {
+    const utterance = new SpeechSynthesisUtterance(currentCorrectSentence);
+    const lang = detectLang(currentCorrectSentence);
+    
+    utterance.lang = lang;
+    // Chiroyli ovoz parametrlari
+    utterance.pitch = 1.2;   // ohang balandroq
+    utterance.rate = 0.95;   // biroz sekinroq
+    utterance.volume = 1;    // maksimal ovoz
+    
+    // Ovozni shu tilga moslab olish
+    const voice = voices.find(v => v.lang.startsWith(lang));
+    if (voice) utterance.voice = voice;
+    
+    speechSynthesis.speak(utterance);
+  }
+}
+
+function loadTest() {
+  if (currentTest >= tests.length) {
+    showFinalResult();
+    return;
+  }
+
+  const test = tests[currentTest];
+  currentCorrectSentence = test.en.join(' ');
+  
+  // Update UI
+  document.getElementById('uzbek-text').textContent = test.uz;
+  document.getElementById('currentTest').textContent = currentTest + 1;
+  document.getElementById('progressFill').style.width = ((currentTest / tests.length) * 100) + '%';
+  document.getElementById('feedback').textContent = '';
+  
+  // Reset
+  selectedWords = [];
+  isChecking = false;
+  
+  // Clear containers
+  const dropZone = document.getElementById('dropZone');
+  const wordsGrid = document.getElementById('wordsGrid');
+  
+  dropZone.innerHTML = '';
+  dropZone.classList.add('drop-zone-empty');
+  wordsGrid.innerHTML = '';
+  
+  // Create word blocks
+  const shuffledWords = [...test.en].sort(() => Math.random() - 0.5);
+  
+  shuffledWords.forEach(word => {
+    const wordDiv = document.createElement('div');
+    wordDiv.className = 'word-block';
+    wordDiv.textContent = word;
+    wordDiv.onclick = () => selectWord(wordDiv, word);
+    
+    wordsGrid.appendChild(wordDiv);
+  });
+}
+
+function selectWord(wordElement, word) {
+  if (isChecking) return;
+  
+  if (navigator.vibrate) navigator.vibrate(30);
+  
+  // If already selected, remove it
+  if (selectedWords.includes(word)) {
+    removeWord(word);
+    return;
+  }
+  
+  // Add to selected words
+  selectedWords.push(word);
+  
+  // Create copy in drop zone
+  const dropZone = document.getElementById('dropZone');
+  const wordCopy = document.createElement('div');
+  wordCopy.className = 'word-block selected';
+  wordCopy.textContent = word;
+  wordCopy.onclick = () => removeWord(word);
+  
+  dropZone.appendChild(wordCopy);
+  dropZone.classList.remove('drop-zone-empty');
+  
+  // Hide original
+  wordElement.style.opacity = '0.3';
+  wordElement.style.pointerEvents = 'none';
+  
+  // Auto check if all words selected
+  const correctOrder = tests[currentTest].en;
+  if (selectedWords.length === correctOrder.length) {
+    setTimeout(checkAnswer, 500);
+  }
+}
+
+function removeWord(word) {
+  if (isChecking) return;
+  
+  if (navigator.vibrate) navigator.vibrate(30);
+  
+  // Remove from selected
+  const index = selectedWords.indexOf(word);
+  if (index > -1) {
+    selectedWords.splice(index, 1);
+  }
+  
+  // Remove from drop zone
+  const dropZone = document.getElementById('dropZone');
+  const dropWords = dropZone.querySelectorAll('.word-block');
+  dropWords.forEach(el => {
+    if (el.textContent === word) {
+      el.remove();
+    }
+  });
+  
+  if (selectedWords.length === 0) {
+    dropZone.classList.add('drop-zone-empty');
+  }
+  
+  // Show original
+  const wordsGrid = document.getElementById('wordsGrid');
+  const originalWords = wordsGrid.querySelectorAll('.word-block');
+  originalWords.forEach(el => {
+    if (el.textContent === word) {
+      el.style.opacity = '1';
+      el.style.pointerEvents = 'auto';
+    }
+  });
+}
+
+function checkAnswer() {
+  if (isChecking) return;
+  isChecking = true;
+  
+  // Show loading
+  const dropZone = document.getElementById('dropZone');
+  const loading = document.createElement('div');
+  loading.className = 'loading';
+  dropZone.appendChild(loading);
+  
+  setTimeout(() => {
+    loading.remove();
+    
+    const correctOrder = tests[currentTest].en;
+    let correctWords = 0;
+    
+    const dropWords = dropZone.querySelectorAll('.word-block');
+    dropWords.forEach((el, index) => {
+      setTimeout(() => {
+        if (el.textContent === correctOrder[index]) {
+          el.className = 'word-block correct';
+          correctWords++;
+        } else {
+          el.className = 'word-block wrong';
+        }
+        
+        if (navigator.vibrate) navigator.vibrate(20);
+      }, index * 100);
+    });
+    
+    setTimeout(() => {
+      const isCorrect = correctWords === correctOrder.length && selectedWords.length === correctOrder.length;
+      const feedback = document.getElementById('feedback');
+      
+      if (isCorrect) {
+        feedback.textContent = '🎉 Ajoyib! Keyingisiga o\'tamiz!';
+        feedback.style.color = '#37f32dff';
+        score += correctOrder.length;
+        
+        if (navigator.vibrate) navigator.vibrate([80, 40, 80]);
+        
+        // Automatically play the correct sentence when answer is correct
+        const correctSentence = correctOrder.join(' ');
+        const utterance = new SpeechSynthesisUtterance(correctSentence);
+        const lang = detectLang(correctSentence);
+        
+        utterance.lang = lang;
+        // Chiroyli ovoz parametrlari
+        utterance.pitch = 1.2;   // ohang balandroq
+        utterance.rate = 0.95;   // biroz sekinroq
+        utterance.volume = 1;    // maksimal ovoz
+        
+        // Ovozni shu tilga moslab olish
+        const voice = voices.find(v => v.lang.startsWith(lang));
+        if (voice) utterance.voice = voice;
+        
+        speechSynthesis.speak(utterance);
+        
+        // Wait for speech to finish before moving to next test
+        setTimeout(() => {
+          currentTest++;
+          loadTest();
+        }, 2500); // Increased delay to allow speech to finish
+        
+      } else {
+        feedback.textContent = `❌ Xato! ${correctWords}/${correctOrder.length} to'g'ri. Qayta urinib ko'ring`;
+        feedback.style.color = '#dc3545';
+        
+        if (navigator.vibrate) navigator.vibrate([150, 80, 150]);
+        
+        // Do NOT play audio for wrong answers and do NOT move to next test
+        setTimeout(() => {
+          loadTest(); // Reset current test
+        }, 2000);
+      }
+      
+      totalWords += correctOrder.length;
+      
+    }, dropWords.length * 100 + 300);
+    
+  }, 1000);
+}
+
+function showFinalResult() {
+  const percentage = Math.round((score / totalWords) * 100);
+  let starCount = 0;
+  
+  if (percentage >= 90) starCount = 5;
+  else if (percentage >= 80) starCount = 4;
+  else if (percentage >= 70) starCount = 3;
+  else if (percentage >= 60) starCount = 2;
+  else if (percentage >= 50) starCount = 1;
+  
+  document.getElementById('finalScore').textContent = `${score}/${totalWords}`;
+  document.getElementById('finalPercentage').textContent = `${percentage}% to'g'ri javob`;
+  
+  const starsEl = document.getElementById('stars');
+  starsEl.innerHTML = '';
+  for (let i = 0; i < 5; i++) {
+    const star = document.createElement('span');
+    star.className = 'star';
+    star.textContent = '⭐';
+    if (i < starCount) {
+      setTimeout(() => {
+        star.classList.add('filled');
+        if (navigator.vibrate) navigator.vibrate(40);
+      }, i * 150);
+    }
+    starsEl.appendChild(star);
+  }
+  
+  document.getElementById('resultModal').style.display = 'flex';
+  
+  if (navigator.vibrate) {
+    setTimeout(() => {
+      navigator.vibrate([200, 100, 200, 100, 200]);
+    }, 500);
+  }
+}
+
+function restartTest() {
+  currentTest = 0;
+  score = 0;
+  totalWords = 0;
+  selectedWords = [];
+  document.getElementById('resultModal').style.display = 'none';
+  loadTest();
+}
+
+// Prevent zoom and context menu
+document.addEventListener('touchend', function (event) {
+  var now = (new Date()).getTime();
+  if (now - lastTouchEnd <= 300) {
+    event.preventDefault();
+  }
+  lastTouchEnd = now;
+}, false);
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+});
+let lastTouchEnd = 0;
+// Initialize when page loads
+speechSynthesis.onvoiceschanged = loadVoices;
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="uz">

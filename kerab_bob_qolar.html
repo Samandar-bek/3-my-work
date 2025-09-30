@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Vositalari Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .category-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .category-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+        }
+        
+        .category-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+        }
+        
+        .tool-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 10px;
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .tool-item:hover {
+            transform: scale(1.05);
+            border-color: #667eea;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+            background: linear-gradient(145deg, #ffffff, #f1f3f4);
+        }
+        
+        .tool-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+        
+        .tool-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+        
+        .tool-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            color: #333;
+            line-height: 1.2;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tools-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 AI Vositalari Dashboard</h1>
+        
+        <div class="grid">
+            <!-- Website -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">🌐</div>
+                    <div class="category-title">Vebsayt</div>
+                </div>
+                <div class="tools-grid">
+                    <a href="https://10web.io" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=10web.io" alt="10Web" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">10Web</div>
+                    </a>
+                    <a href="https://durable.co" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=durable.co" alt="Durable" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Durable</div>
+                    </a>
+                    <a href="https://www.elegantthemes.com/divi/" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=elegantthemes.com" alt="Divi AI" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Divi AI</div>
+                    </a>
+                    <a href="https://www.hostinger.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=hostinger.com" alt="Hostinger" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Hostinger</div>
+                    </a>
+                    <a href="https://www.framer.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=framer.com" alt="Framer" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Framer</div>
+                    </a>
+                    <a href="https://www.wix.com/adi" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=wix.com" alt="Wix ADI" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Wix ADI</div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Video -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">🎥</div>
+                    <div class="category-title">Video</div>
+                </div>
+                <div class="tools-grid">
+                    <a href="https://klap.app" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=klap.app" alt="Klap" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Klap</div>
+                    </a>
+                    <a href="https://opus.pro" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=opus.pro" alt="Opus" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Opus</div>
+                    </a>
+                    <a href="https://eightify.app" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=eightify.app" alt="Eightify" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Eightify</div>
+                    </a>
+                    <a href="https://invideo.io" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=invideo.io" alt="Invideo" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Invideo</div>
+                    </a>
+                    <a href="https://www.heygen.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=heygen.com" alt="Heygen" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Heygen</div>
+                    </a>
+                    <a href="https://runwayml.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=runwayml.com" alt="Runway" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Runway</div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Research -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">🔎</div>
+                    <div class="category-title">Tadqiqot</div>
+                </div>
+                <div class="tools-grid">
+                    <a href="https://claude.ai" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=claude.ai" alt="Claude" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Claude</div>
+                    </a>
+                    <a href="https://chat.openai.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=openai.com" alt="ChatGPT" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">ChatGPT</div>
+                    </a>
+                    <a href="https://www.perplexity.ai" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=perplexity.ai" alt="Perplexity" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Perplexity</div>
+                    </a>
+                    <a href="https://www.bing.com/chat" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=bing.com" alt="Bing Chat" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Bing Chat</div>
+                    </a>
+                    <a href="https://www.clearscope.io" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=clearscope.io" alt="Clearscope" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Clearscope</div>
+                    </a>
+                    <a href="https://www.marketmuse.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=marketmuse.com" alt="Marketmuse" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Marketmuse</div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Image -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">🖼️</div>
+                    <div class="category-title">Tasvir</div>
+                </div>
+                <div class="tools-grid">
+                    <a href="https://www.tryleap.ai" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=tryleap.ai" alt="Leap AI" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Leap AI</div>
+                    </a>
+                    <a href="https://gencraft.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=gencraft.com" alt="Gencraft" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Gencraft</div>
+                    </a>
+                    <a href="https://www.segmind.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=segmind.com" alt="Segmind" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Segmind</div>
+                    </a>
+                    <a href="https://www.midjourney.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=midjourney.com" alt="MidJourney" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">MidJourney</div>
+                    </a>
+                    <a href="https://www.clarifai.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=clarifai.com" alt="Clarifai" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Clarifai</div>
+                    </a>
+                    <a href="https://zapier.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=zapier.com" alt="Zapier" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Zapier</div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Copywriting -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">✍️</div>
+                    <div class="category-title">Matn yozish</div>
+                </div>
+                <div class="tools-grid">
+                    <a href="https://rytr.me" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=rytr.me" alt="Rytr" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Rytr</div>
+                    </a>
+                    <a href="https://www.copy.ai" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=copy.ai" alt="Copy AI" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Copy AI</div>
+                    </a>
+                    <a href="https://writesonic.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=writesonic.com" alt="Writesonic" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Writesonic</div>
+                    </a>
+                    <a href="https://surferseo.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=surferseo.com" alt="SurferSEO" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">SurferSEO</div>
+                    </a>
+                    <a href="https://www.wordtune.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=wordtune.com" alt="Wordtune" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Wordtune</div>
+                    </a>
+                    <a href="https://www.crayon.co" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=crayon.co" alt="Crayon" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Crayon</div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Meeting -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">👥</div>
+                    <div class="category-title">Uchrashuv</div>
+                </div>
+                <div class="tools-grid">
+                    <a href="https://tldv.io" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=tldv.io" alt="TLDV" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">TLDV</div>
+                    </a>
+                    <a href="https://otter.ai" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=otter.ai" alt="Otter" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Otter</div>
+                    </a>
+                    <a href="https://www.notifyai.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=notifyai.com" alt="Notify AI" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Notify AI</div>
+                    </a>
+                    <a href="https://fireflies.ai" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=fireflies.ai" alt="Fireflies" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Fireflies</div>
+                    </a>
+                    <a href="https://www.airgram.io" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=airgram.io" alt="Airgram" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Airgram</div>
+                    </a>
+                    <a href="https://fathom.video" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=fathom.video" alt="Fathom" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Fathom</div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- SEO -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">📈</div>
+                    <div class="category-title">SEO</div>
+                </div>
+                <div class="tools-grid">
+                    <a href="https://vidiq.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=vidiq.com" alt="VidIQ" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">VidIQ</div>
+                    </a>
+                    <a href="https://www.seonaai.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=seonaai.com" alt="Seona AI" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Seona AI</div>
+                    </a>
+                    <a href="https://blogseo.ai" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=blogseo.ai" alt="BlogSEO" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">BlogSEO</div>
+                    </a>
+                    <a href="https://serpstat.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=serpstat.com" alt="Serpstat" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Serpstat</div>
+                    </a>
+                    <a href="https://wordlift.io" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=wordlift.io" alt="Wordlift" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Wordlift</div>
+                    </a>
+                    <a href="https://alli.ai" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=alli.ai" alt="Alli AI" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Alli AI</div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Design -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">🎨</div>
+                    <div class="category-title">Dizayn</div>
+                </div>
+                <div class="tools-grid">
+                    <a href="https://flair.ai" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=flair.ai" alt="Flair AI" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Flair AI</div>
+                    </a>
+                    <a href="https://www.designify.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=designify.com" alt="Designify" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Designify</div>
+                    </a>
+                    <a href="https://clipdrop.co" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=clipdrop.co" alt="Clipdrop" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Clipdrop</div>
+                    </a>
+                    <a href="https://www.autodraw.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=autodraw.com" alt="Autodraw" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Autodraw</div>
+                    </a>
+                    <a href="https://crello.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=crello.com" alt="Crello" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Crello</div>
+                    </a>
+                    <a href="https://snappa.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=snappa.com" alt="Snappa" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Snappa</div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Prompts -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">💡</div>
+                    <div class="category-title">Promptlar</div>
+                </div>
+                <div class="tools-grid">
+                    <a href="https://flowgpt.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=flowgpt.com" alt="FlowGPT" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">FlowGPT</div>
+                    </a>
+                    <a href="https://alicent.ai" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=alicent.ai" alt="Alicent AI" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Alicent AI</div>
+                    </a>
+                    <a href="https://www.promptbox.ai" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=promptbox.ai" alt="Promptbox" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Promptbox</div>
+                    </a>
+                    <a href="https://play.aidungeon.io" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=aidungeon.io" alt="AI Dungeon" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">AI Dungeon</div>
+                    </a>
+                    <a href="https://promptly.app" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=promptly.app" alt="Promptly" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Promptly</div>
+                    </a>
+                    <a href="https://www.artbreeder.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=artbreeder.com" alt="Artbreeder" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Artbreeder</div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Chatbot -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">🤖</div>
+                    <div class="category-title">Chatbot</div>
+                </div>
+                <div class="tools-grid">
+                    <a href="https://droxy.ai" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=droxy.ai" alt="Droxy" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Droxy</div>
+                    </a>
+                    <a href="https://www.chatbase.co" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=chatbase.co" alt="Chatbase" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Chatbase</div>
+                    </a>
+                    <a href="https://www.chatsimple.ai" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=chatsimple.ai" alt="Chatsimple" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Chatsimple</div>
+                    </a>
+                    <a href="https://dialogflow.cloud.google.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=dialogflow.cloud.google.com" alt="Dialogflow" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Dialogflow</div>
+                    </a>
+                    <a href="https://chatbot.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=chatbot.com" alt="Chatbot" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Chatbot</div>
+                    </a>
+                    <a href="https://chatfuel.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=chatfuel.com" alt="Chatfuel" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Chatfuel</div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Automation -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">⚙️</div>
+                    <div class="category-title">Avtomatlashtirish</div>
+                </div>
+                <div class="tools-grid">
+                    <a href="https://www.xembly.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=xembly.com" alt="Xembly" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Xembly</div>
+                    </a>
+                    <a href="https://www.bardeen.ai" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=bardeen.ai" alt="Bardeen" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Bardeen</div>
+                    </a>
+                    <a href="https://www.uipath.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=uipath.com" alt="UiPath" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">UiPath</div>
+                    </a>
+                    <a href="https://www.blueprism.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=blueprism.com" alt="Blue Prism" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Blue Prism</div>
+                    </a>
+                    <a href="https://www.marketo.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=marketo.com" alt="Marketo" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Marketo</div>
+                    </a>
+                    <a href="https://www.drip.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=drip.com" alt="Drip" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Drip</div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Presentation -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">🖥️</div>
+                    <div class="category-title">Taqdimot</div>
+                </div>
+                <div class="tools-grid">
+                    <a href="https://www.decktopus.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=decktopus.com" alt="Decktopus" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Decktopus</div>
+                    </a>
+                    <a href="https://www.slidesai.io" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=slidesai.io" alt="Slides AI" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Slides AI</div>
+                    </a>
+                    <a href="https://gamma.app" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=gamma.app" alt="Gamma AI" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Gamma AI</div>
+                    </a>
+                    <a href="https://designs.ai" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=designs.ai" alt="Designs AI" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Designs AI</div>
+                    </a>
+                    <a href="https://www.beautiful.ai" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=beautiful.ai" alt="Beautiful AI" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Beautiful AI</div>
+                    </a>
+                    <a href="https://www.lumens5.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=lumens5.com" alt="Lumens" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Lumens</div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Logo -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">🏷️</div>
+                    <div class="category-title">Logotip</div>
+                </div>
+                <div class="tools-grid">
+                    <a href="https://looka.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=looka.com" alt="Looka" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Looka</div>
+                    </a>
+                    <a href="https://www.logoai.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=logoai.com" alt="LogoAI" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">LogoAI</div>
+                    </a>
+                    <a href="https://brandmark.io" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=brandmark.io" alt="Brandmark" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Brandmark</div>
+                    </a>
+                    <a href="https://stockimg.ai" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=stockimg.ai" alt="Stockimg AI" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Stockimg AI</div>
+                    </a>
+                    <a href="https://www.namecheap.com/logo-maker/" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=namecheap.com" alt="Namecheap" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Namecheap</div>
+                    </a>
+                    <a href="https://www.logaster.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=logaster.com" alt="Logaster" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Logaster</div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Marketing -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">📢</div>
+                    <div class="category-title">Marketing</div>
+                </div>
+                <div class="tools-grid">
+                    <a href="https://www.trypencil.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=trypencil.com" alt="Trypencil" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Trypencil</div>
+                    </a>
+                    <a href="https://www.adcreative.ai" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=adcreative.ai" alt="Adcreative" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Adcreative</div>
+                    </a>
+                    <a href="https://www.adcopy.ai" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=adcopy.ai" alt="AdCopy" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">AdCopy</div>
+                    </a>
+                    <a href="https://simplified.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=simplified.com" alt="Simplified" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Simplified</div>
+                    </a>
+                    <a href="https://sendbird.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=sendbird.com" alt="Sendbird" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Sendbird</div>
+                    </a>
+                    <a href="https://mailchimp.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=mailchimp.com" alt="Mailchimp" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Mailchimp</div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Audio -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">🎙️</div>
+                    <div class="category-title">Audio</div>
+                </div>
+                <div class="tools-grid">
+                    <a href="https://lovo.ai" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=lovo.ai" alt="Lovo AI" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Lovo AI</div>
+                    </a>
+                    <a href="https://elevenlabs.io" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=elevenlabs.io" alt="Eleven Labs" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Eleven Labs</div>
+                    </a>
+                    <a href="https://www.descript.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=descript.com" alt="Descript" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Descript</div>
+                    </a>
+                    <a href="https://lyrebird.ai" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=lyrebird.ai" alt="Lyrebird" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Lyrebird</div>
+                    </a>
+                    <a href="https://auphonic.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=auphonic.com" alt="Auphonic" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Auphonic</div>
+                    </a>
+                    <a href="https://www.sonix.ai" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=sonix.ai" alt="Sonic AI" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Sonic AI</div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Social Media -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">📲</div>
+                    <div class="category-title">Ijtimoiy tarmoq</div>
+                </div>
+                <div class="tools-grid">
+                    <a href="https://hootsuite.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=hootsuite.com" alt="Hootsuite" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Hootsuite</div>
+                    </a>
+                    <a href="https://buffer.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=buffer.com" alt="Buffer" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Buffer</div>
+                    </a>
+                    <a href="https://www.agorapulse.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=agorapulse.com" alt="Agorapulse" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Agorapulse</div>
+                    </a>
+                    <a href="https://socialbee.io" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=socialbee.io" alt="SocialBee" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">SocialBee</div>
+                    </a>
+                    <a href="https://www.loomly.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=loomly.com" alt="Loomly" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Loomly</div>
+                    </a>
+                    <a href="https://social.zoho.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=zoho.com" alt="Zoho Social" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Zoho Social</div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Startup -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">🚀</div>
+                    <div class="category-title">Startap</div>
+                </div>
+                <div class="tools-grid">
+                    <a href="https://tome.app" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=tome.app" alt="Tome" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Tome</div>
+                    </a>
+                    <a href="https://www.webengage.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=webengage.com" alt="Webengage" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Webengage</div>
+                    </a>
+                    <a href="https://namelix.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=namelix.com" alt="NameLix" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">NameLix</div>
+                    </a>
+                    <a href="https://www.pitchgrade.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=pitchgrade.com" alt="Pitchgrade" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Pitchgrade</div>
+                    </a>
+                    <a href="https://www.validatorai.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=validatorai.com" alt="Validator AI" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Validator AI</div>
+                    </a>
+                    <a href="https://airtable.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=airtable.com" alt="Airtable" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Airtable</div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Productivity -->
+            <div class="category-card">
+                <div class="category-header">
+                    <div class="category-icon">🛠️</div>
+                    <div class="category-title">Samaradorlik</div>
+                </div>
+                <div class="tools-grid">
+                    <a href="https://getmerlin.in" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=getmerlin.in" alt="Merlin" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Merlin</div>
+                    </a>
+                    <a href="https://tinywow.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=tinywow.com" alt="Tinywow" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Tinywow</div>
+                    </a>
+                    <a href="https://www.notion.so" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=notion.so" alt="Notion AI" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Notion AI</div>
+                    </a>
+                    <a href="https://www.personal.ai" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=personal.ai" alt="Personal AI" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Personal AI</div>
+                    </a>
+                    <a href="https://asana.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=asana.com" alt="Asana" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Asana</div>
+                    </a>
+                    <a href="https://www.scalenut.com" target="_blank" class="tool-item">
+                        <div class="tool-logo">
+                            <img src="https://www.google.com/s2/favicons?sz=64&domain=scalenut.com" alt="Scalenut" onerror="this.style.display='none'">
+                        </div>
+                        <div class="tool-name">Scalenut</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

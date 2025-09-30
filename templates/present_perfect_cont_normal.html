@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Premium 50 Test - Normal Level</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  position: relative;
+  background: #1a1200;
+}
+
+/* Animated Gradient Background */
+.gradient-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background: linear-gradient(135deg, #2d1f00 0%, #4a3500 25%, #8a6600 50%, #c99000 75%, #ffb800 100%);
+  background-size: 400% 400%;
+  animation: gradientFlow 20s ease infinite;
+}
+
+@keyframes gradientFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Floating Orbs */
+.orbs-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.4;
+  animation: float 25s infinite ease-in-out;
+}
+
+.orb1 { width: 300px; height: 300px; background: radial-gradient(circle, #ffb800, transparent); top: 10%; left: 10%; animation-delay: 0s; }
+.orb2 { width: 400px; height: 400px; background: radial-gradient(circle, #c99000, transparent); top: 60%; right: 15%; animation-delay: -8s; }
+.orb3 { width: 250px; height: 250px; background: radial-gradient(circle, #8a6600, transparent); bottom: 20%; left: 30%; animation-delay: -15s; }
+.orb4 { width: 350px; height: 350px; background: radial-gradient(circle, #4a3500, transparent); top: 40%; right: 40%; animation-delay: -20s; }
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  25% { transform: translate(30px, -40px) rotate(90deg) scale(1.1); }
+  50% { transform: translate(-20px, 30px) rotate(180deg) scale(0.9); }
+  75% { transform: translate(40px, 20px) rotate(270deg) scale(1.05); }
+}
+
+/* Glassmorphism Container */
+.main-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  max-width: 580px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border-radius: 32px;
+  padding: 40px 32px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+              0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+              0 20px 60px rgba(255, 184, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  animation: containerEntry 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+@keyframes containerEntry {
+  0% { opacity: 0; transform: scale(0.9) translateY(30px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.test-counter {
+  background: linear-gradient(135deg, #ffb800, #c99000, #8a6600);
+  background-size: 200% 200%;
+  animation: gradientShift 4s ease infinite;
+  color: white;
+  padding: 14px 28px;
+  border-radius: 24px;
+  font-weight: 800;
+  font-size: 16px;
+  margin-bottom: 20px;
+  display: inline-block;
+  box-shadow: 0 8px 24px rgba(255, 184, 0, 0.4),
+              0 0 40px rgba(255, 184, 0, 0.2);
+  animation: counterPulse 0.8s ease-out, gradientShift 4s ease infinite;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes counterPulse {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.level-badge {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 12px;
+  margin-left: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Progress Bar */
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  margin: 24px 0;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3) inset;
+  animation: progressEntry 0.8s ease-out 0.2s both;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ffb800, #c99000, #ffb800);
+  background-size: 200% 100%;
+  border-radius: 20px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 0%;
+  box-shadow: 0 0 20px rgba(255, 184, 0, 0.6),
+              0 0 40px rgba(255, 184, 0, 0.3);
+  animation: progressGlow 2s ease-in-out infinite;
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: progressShine 2s infinite;
+}
+
+@keyframes progressShine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes progressGlow {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.2); }
+}
+
+@keyframes progressEntry {
+  from { opacity: 0; transform: scaleX(0.8); }
+  to { opacity: 1; transform: scaleX(1); }
+}
+
+/* Text */
+#uzbek-text {
+  font-size: 1.5em;
+  font-weight: 800;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 20px;
+  line-height: 1.4;
+  animation: textEntry 0.8s ease-out 0.4s both;
+  font-family: 'Poppins', sans-serif;
+  text-shadow: 0 2px 20px rgba(255, 184, 0, 0.4),
+               0 0 40px rgba(255, 184, 0, 0.2);
+}
+
+@keyframes textEntry {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#feedback {
+  font-size: 1.1em;
+  font-weight: 700;
+  text-align: center;
+  min-height: 40px;
+  margin: 20px 0;
+  animation: feedbackEntry 0.8s ease-out 0.6s both;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes feedbackEntry {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Back Button */
+.back-btn {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(15px);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 14px 28px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  margin: 0 auto 30px auto;
+  display: block;
+  width: 160px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  animation: buttonEntry 0.8s ease-out 0.8s both;
+  font-family: 'Poppins', sans-serif;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(255, 184, 0, 0.3);
+  border-color: rgba(255, 184, 0, 0.4);
+}
+
+.back-btn:active {
+  transform: translateY(-1px);
+}
+
+@keyframes buttonEntry {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Drop Zone */
+.drop-zone {
+  min-height: 100px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  padding: 20px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: dropZoneEntry 0.8s ease-out 1s both;
+  backdrop-filter: blur(10px);
+}
+
+@keyframes dropZoneEntry {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.drop-zone:not(.drop-zone-empty) {
+  border-color: rgba(255, 184, 0, 0.6);
+  background: rgba(255, 184, 0, 0.08);
+  box-shadow: 0 0 30px rgba(255, 184, 0, 0.2),
+              0 0 60px rgba(255, 184, 0, 0.1) inset;
+}
+
+.drop-zone-empty::before {
+  content: "⚡ So'zlarni to'g'ri tartibda joylang";
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 16px;
+  font-weight: 600;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  animation: pulseText 2s ease-in-out infinite;
+}
+
+@keyframes pulseText {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Words Container */
+.words-container {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  animation: wordsEntry 0.8s ease-out 1.2s both;
+  backdrop-filter: blur(10px);
+}
+
+@keyframes wordsEntry {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.words-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* Word Blocks */
+.word-block {
+  padding: 14px 24px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 16px;
+  color: #2d1f00;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15),
+              0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-align: center;
+  min-width: 70px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.word-block::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 184, 0, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.word-block:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.word-block:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 32px rgba(255, 184, 0, 0.3),
+              0 0 0 1px rgba(255, 184, 0, 0.3) inset;
+}
+
+.word-block:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+.word-block.selected {
+  background: linear-gradient(135deg, #ffb800, #c99000);
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 12px 32px rgba(255, 184, 0, 0.5),
+              0 0 40px rgba(255, 184, 0, 0.3);
+  animation: selectBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes selectBounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1.05); }
+}
+
+.word-block.correct {
+  background: linear-gradient(135deg, #c99000, #8a6600);
+  color: white;
+  animation: correctPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 12px 32px rgba(201, 144, 0, 0.6),
+              0 0 60px rgba(201, 144, 0, 0.4);
+}
+
+@keyframes correctPop {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.2) rotate(5deg); }
+  60% { transform: scale(0.95) rotate(-5deg); }
+  100% { transform: scale(1.1) rotate(0deg); }
+}
+
+.word-block.wrong {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+  color: white;
+  animation: wrongShake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  box-shadow: 0 12px 32px rgba(255, 107, 107, 0.6),
+              0 0 60px rgba(255, 107, 107, 0.4);
+}
+
+@keyframes wrongShake {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  10% { transform: translateX(-8px) rotate(-3deg); }
+  20% { transform: translateX(8px) rotate(3deg); }
+  30% { transform: translateX(-8px) rotate(-3deg); }
+  40% { transform: translateX(8px) rotate(3deg); }
+  50% { transform: translateX(-4px) rotate(-1deg); }
+  60% { transform: translateX(4px) rotate(1deg); }
+  70% { transform: translateX(-4px) rotate(-1deg); }
+  80% { transform: translateX(4px) rotate(1deg); }
+  90% { transform: translateX(-2px) rotate(0deg); }
+}
+
+/* Loading Spinner */
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top: 4px solid #ffb800;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  box-shadow: 0 0 20px rgba(255, 184, 0, 0.5);
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Result Modal */
+.result-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(15px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: modalFadeIn 0.4s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.result-content {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(30px);
+  border-radius: 32px;
+  padding: 40px 32px;
+  text-align: center;
+  max-width: 420px;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4),
+              0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  animation: modalSlideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalSlideUp {
+  from { opacity: 0; transform: scale(0.9) translateY(30px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.result-content h2 {
+  font-size: 2em;
+  font-weight: 900;
+  color: white;
+  margin-bottom: 20px;
+  font-family: 'Poppins', sans-serif;
+  text-shadow: 0 4px 20px rgba(255, 184, 0, 0.5);
+  animation: resultTitlePop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+}
+
+@keyframes resultTitlePop {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
+}
+
+.result-score {
+  font-size: 3em;
+  font-weight: 900;
+  background: linear-gradient(135deg, #ffb800, #c99000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 20px 0;
+  font-family: 'Poppins', sans-serif;
+  animation: scoreCount 0.8s ease-out 0.4s both;
+  filter: drop-shadow(0 4px 20px rgba(255, 184, 0, 0.5));
+}
+
+@keyframes scoreCount {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.result-percentage {
+  font-size: 1.3em;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 700;
+  margin-bottom: 24px;
+  animation: percentageFade 0.6s ease-out 0.6s both;
+}
+
+@keyframes percentageFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.stars {
+  font-size: 2.5em;
+  margin: 24px 0;
+}
+
+.star {
+  color: rgba(255, 255, 255, 0.2);
+  margin: 0 6px;
+  transition: all 0.4s ease;
+  display: inline-block;
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+}
+
+.star.filled {
+  color: #ffd700;
+  animation: starPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+}
+
+@keyframes starPop {
+  0% { transform: scale(0) rotate(0deg); }
+  50% { transform: scale(1.3) rotate(180deg); }
+  100% { transform: scale(1) rotate(360deg); }
+}
+
+.retry-btn {
+  background: linear-gradient(135deg, #ffb800, #c99000);
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 24px;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 24px rgba(255, 184, 0, 0.4);
+  animation: buttonFade 0.6s ease-out 0.8s both;
+  font-family: 'Poppins', sans-serif;
+}
+
+.retry-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(255, 184, 0, 0.6);
+}
+
+@keyframes buttonFade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  body { padding: 10px; }
+  .container { padding: 28px 20px; border-radius: 28px; }
+  #uzbek-text { font-size: 1.25em; }
+  .word-block { padding: 12px 20px; font-size: 15px; }
+  .back-btn { width: 140px; padding: 12px 24px; }
+  .result-content { padding: 32px 24px; border-radius: 28px; }
+  .result-content h2 { font-size: 1.6em; }
+  .result-score { font-size: 2.4em; }
+}
+
+@media (max-width: 360px) {
+  .container { padding: 24px 16px; }
+  .words-grid { gap: 10px; }
+  .word-block { padding: 10px 16px; font-size: 14px; min-width: 60px; }
+}
+</style>
+</head>
+<body>
+
+<div class="gradient-bg"></div>
+<div class="orbs-container">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  <div class="orb orb4"></div>
+</div>
+
+<div class="main-wrapper">
+  <div class="container">
+    <div class="header">
+      <div class="test-counter">
+        Test <span id="currentTest">1</span> / 50
+        <span class="level-badge">NORMAL</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div id="uzbek-text">Loading...</div>
+      <div id="feedback"></div>
+    </div>
+
+    <button class="back-btn" onclick="window.history.back()">← Menu</button>
+
+    <div class="drop-zone drop-zone-empty" id="dropZone"></div>
+    
+    <div class="words-container">
+      <div class="words-grid" id="wordsGrid"></div>
+    </div>
+  </div>
+</div>
+
+<div class="result-modal" id="resultModal">
+  <div class="result-content">
+    <h2>🎉 Test tugadi!</h2>
+    <div class="result-score" id="finalScore"></div>
+    <div class="result-percentage" id="finalPercentage"></div>
+    <div class="stars" id="stars"></div>
+    <button class="retry-btn" onclick="restartTest()">Qayta topshirish</button><br>
+    <button class="back-btn" onclick="window.history.back()" style="margin-top: 16px;">← Menu</button>
+  </div>
+</div>
+
+<script>
+const tests = [
+  {uz: "Men soatlab kitob o‘qiyapman", en: ["I", "have", "been", "reading", "a", "book", "for", "hours"]},
+  {uz: "U allaqachon ish qilmoqda", en: ["He", "has", "been", "working", "already"]},
+  {uz: "Biz uzoq vaqtdan beri kinoga boryapmiz", en: ["We", "have", "been", "going", "to", "the", "cinema", "for", "a", "long", "time"]},
+  {uz: "U yangi mashina haydamoqda", en: ["She", "has", "been", "driving", "a", "new", "car"]},
+  {uz: "Men choy ichishni davom ettiryapman", en: ["I", "have", "been", "drinking", "tea"]},
+  {uz: "U kitob o‘qishni davom ettirdi", en: ["He", "has", "been", "reading", "the", "book"]},
+  {uz: "Biz kecha bog‘da yurib keldik", en: ["We", "have", "been", "walking", "in", "the", "park", "since", "yesterday"]},
+  {uz: "U ovqat tayyorlamoqda", en: ["She", "has", "been", "cooking", "food"]},
+  {uz: "Men yangi filmni tomosha qilayapman", en: ["I", "have", "been", "watching", "the", "new", "movie"]},
+  {uz: "U telefon bilan gaplashib keldi", en: ["He", "has", "been", "talking", "on", "the", "phone"]},
+  {uz: "Biz maktabga ketmoqdamiz", en: ["We", "have", "been", "going", "to", "school"]},
+  {uz: "U ingliz tilini o‘rganmoqda", en: ["She", "has", "been", "learning", "English"]},
+  {uz: "Men sport zalida mashq qilayapman", en: ["I", "have", "been", "exercising", "at", "the", "gym"]},
+  {uz: "U kechqurun uyda qolmoqda", en: ["He", "has", "been", "staying", "at", "home", "in", "the", "evening"]},
+  {uz: "Biz yangi restoranlarni sinab ko‘ryapmiz", en: ["We", "have", "been", "trying", "new", "restaurants"]},
+  {uz: "U yangi qo‘shiq kuylayapti", en: ["She", "has", "been", "singing", "a", "new", "song"]},
+  {uz: "Men uy vazifasini qilayapman", en: ["I", "have", "been", "doing", "my", "homework"]},
+  {uz: "U tez yugurib keldi", en: ["He", "has", "been", "running", "fast"]},
+  {uz: "Biz yangi kitoblarni o‘qiyapmiz", en: ["We", "have", "been", "reading", "new", "books"]},
+  {uz: "U yangi kiyimlarni sinab ko‘rmoqda", en: ["She", "has", "been", "trying", "new", "clothes"]},
+  {uz: "Men tez ovqat tayyorlayapman", en: ["I", "have", "been", "preparing", "quick", "food"]},
+  {uz: "U yangi filmni tomosha qilmoqda", en: ["He", "has", "been", "watching", "the", "new", "movie"]},
+  {uz: "Biz darsni davom ettiryapmiz", en: ["We", "have", "been", "continuing", "the", "lesson"]},
+  {uz: "Men yangi telefon ishlatyapman", en: ["I", "have", "been", "using", "a", "new", "phone"]},
+  {uz: "U chiroyli rasm chizmoqda", en: ["She", "has", "been", "drawing", "a", "beautiful", "picture"]},
+  {uz: "Biz yangi o‘quv markaziga borib keldik", en: ["We", "have", "been", "going", "to", "a", "new", "learning", "center"]},
+  {uz: "Men tez yugurishni mashq qilayapman", en: ["I", "have", "been", "practicing", "running", "fast"]},
+  {uz: "U yangi mashinani haydamoqda", en: ["He", "has", "been", "driving", "a", "new", "car"]},
+  {uz: "Biz bog‘da sayr qilayapmiz", en: ["We", "have", "been", "walking", "in", "the", "park"]},
+  {uz: "Men kitoblarni kutubxonaga qo‘ydim va ishlatmoqdaman", en: ["I", "have", "been", "putting", "books", "in", "the", "library"]},
+  {uz: "U yangi qo‘shiqni kuylayapti", en: ["He", "has", "been", "singing", "a", "new", "song"]},
+  {uz: "Biz yangi o‘quv dasturini boshladik va davom ettiryapmiz", en: ["We", "have", "been", "starting", "and", "continuing", "a", "new", "study", "program"]},
+  {uz: "Men ertalab yugurmoqdaman", en: ["I", "have", "been", "running", "in", "the", "morning"]},
+  {uz: "U tez ishlayapti", en: ["He", "has", "been", "working", "fast"]},
+  {uz: "Biz yangi do‘kon ochib, ishlatmoqdamiz", en: ["We", "have", "been", "opening", "a", "new", "shop"]},
+  {uz: "Men choy bilan non yeyapman", en: ["I", "have", "been", "eating", "bread", "with", "tea"]},
+  {uz: "U yangi telefonini zaryad qilmoqda", en: ["She", "has", "been", "charging", "her", "new", "phone"]},
+  {uz: "Biz ertalab maktabga borib keldik", en: ["We", "have", "been", "going", "to", "school", "in", "the", "morning"]},
+  {uz: "Men yangi poyabzal kiymoqdaman", en: ["I", "have", "been", "wearing", "new", "shoes"]},
+  {uz: "U uy vazifasini qilmoqda", en: ["He", "has", "been", "doing", "his", "homework"]},
+  {uz: "Biz kinoga borib keldik", en: ["We", "have", "been", "going", "to", "the", "cinema"]},
+  {uz: "Men yangi telefonni ishlatyapman", en: ["I", "have", "been", "using", "my", "new", "phone"]},
+  {uz: "U chiroyli rasm chizib keldi", en: ["She", "has", "been", "drawing", "a", "beautiful", "picture"]},
+  {uz: "Biz yangi uyga ko‘chib keldik", en: ["We", "have", "been", "moving", "to", "a", "new", "house"]},
+  {uz: "Men yangi mashina haydamoqdaman", en: ["I", "have", "been", "driving", "a", "new", "car"]},
+  {uz: "U yangi retseptni tayyorlamoqda", en: ["He", "has", "been", "preparing", "a", "new", "recipe"]},
+  {uz: "Biz yangi o‘quv markazida mashq qilayapmiz", en: ["We", "have", "been", "practicing", "at", "the", "new", "learning", "center"]},
+  {uz: "Men yangi rasm chizmoqdaman", en: ["I", "have", "been", "drawing", "a", "new", "painting"]}
+];
+
+
+
+let currentTest = 0;
+let score = 0;
+let totalWords = 0;
+let isChecking = false;
+let selectedWords = [];
+let currentCorrectSentence = '';
+let voices = [];
+
+function init() {
+  loadVoices();
+  loadTest();
+}
+
+function loadVoices() {
+  voices = speechSynthesis.getVoices();
+}
+
+function detectLang(text) {
+  if (/[a-z]/i.test(text)) return "en-US";
+  return "uz-UZ";
+}
+
+function playCurrentSentence() {
+  if (currentCorrectSentence) {
+    const utterance = new SpeechSynthesisUtterance(currentCorrectSentence);
+    const lang = detectLang(currentCorrectSentence);
+    utterance.lang = lang;
+    utterance.pitch = 1.1;
+    utterance.rate = 0.98;
+    utterance.volume = 1;
+    const voice = voices.find(v => v.lang.startsWith(lang));
+    if (voice) utterance.voice = voice;
+    speechSynthesis.speak(utterance);
+  }
+}
+
+function loadTest() {
+  if (currentTest >= tests.length) { showFinalResult(); return; }
+  const test = tests[currentTest];
+  currentCorrectSentence = test.en.join(' ');
+  document.getElementById('uzbek-text').textContent = test.uz;
+  document.getElementById('currentTest').textContent = currentTest + 1;
+  document.getElementById('progressFill').style.width = ((currentTest / tests.length) * 100) + '%';
+  document.getElementById('feedback').textContent = '';
+  selectedWords = [];
+  isChecking = false;
+  const dropZone = document.getElementById('dropZone');
+  const wordsGrid = document.getElementById('wordsGrid');
+  dropZone.innerHTML = '';
+  dropZone.classList.add('drop-zone-empty');
+  wordsGrid.innerHTML = '';
+  const shuffledWords = [...test.en].sort(() => Math.random() - 0.5);
+  shuffledWords.forEach((word, index) => {
+    const wordDiv = document.createElement('div');
+    wordDiv.className = 'word-block';
+    wordDiv.textContent = word;
+    wordDiv.style.animationDelay = (index * 0.05) + 's';
+    wordDiv.onclick = () => selectWord(wordDiv, word);
+    wordsGrid.appendChild(wordDiv);
+  });
+}
+
+function selectWord(wordElement, word) {
+  if (isChecking) return;
+  if (navigator.vibrate) navigator.vibrate(25);
+  if (selectedWords.includes(word)) { removeWord(word); return; }
+  selectedWords.push(word);
+  const dropZone = document.getElementById('dropZone');
+  const wordCopy = document.createElement('div');
+  wordCopy.className = 'word-block selected';
+  wordCopy.textContent = word;
+  wordCopy.onclick = () => removeWord(word);
+  dropZone.appendChild(wordCopy);
+  dropZone.classList.remove('drop-zone-empty');
+  wordElement.style.opacity = '0.35';
+  wordElement.style.pointerEvents = 'none';
+  const correctOrder = tests[currentTest].en;
+  if (selectedWords.length === correctOrder.length) { setTimeout(checkAnswer, 450); }
+}
+
+function removeWord(word) {
+  if (isChecking) return;
+  if (navigator.vibrate) navigator.vibrate(25);
+  const index = selectedWords.indexOf(word);
+  if (index > -1) selectedWords.splice(index, 1);
+  const dropZone = document.getElementById('dropZone');
+  const dropWords = dropZone.querySelectorAll('.word-block');
+  dropWords.forEach(el => { if (el.textContent === word) el.remove(); });
+  if (selectedWords.length === 0) dropZone.classList.add('drop-zone-empty');
+  const wordsGrid = document.getElementById('wordsGrid');
+  const originalWords = wordsGrid.querySelectorAll('.word-block');
+  originalWords.forEach(el => { if (el.textContent === word) { el.style.opacity = '1'; el.style.pointerEvents = 'auto'; } });
+}
+
+function checkAnswer() {
+  if (isChecking) return;
+  isChecking = true;
+  const dropZone = document.getElementById('dropZone');
+  const loading = document.createElement('div');
+  loading.className = 'loading';
+  dropZone.appendChild(loading);
+  setTimeout(() => {
+    loading.remove();
+    const correctOrder = tests[currentTest].en;
+    let correctWords = 0;
+    const dropWords = dropZone.querySelectorAll('.word-block');
+    dropWords.forEach((el, index) => {
+      setTimeout(() => {
+        if (el.textContent === correctOrder[index]) { el.className = 'word-block correct'; correctWords++; }
+        else { el.className = 'word-block wrong'; }
+        if (navigator.vibrate) navigator.vibrate(18);
+      }, index * 90);
+    });
+    setTimeout(() => {
+      const isCorrect = correctWords === correctOrder.length && selectedWords.length === correctOrder.length;
+      const feedback = document.getElementById('feedback');
+      if (isCorrect) {
+        feedback.textContent = "🎉 Ajoyib! Keyingisiga o'tamiz!";
+        feedback.style.color = '#11e90dff';
+        score += correctOrder.length;
+        if (navigator.vibrate) navigator.vibrate([70,30,70]);
+        const correctSentence = correctOrder.join(' ');
+        const utterance = new SpeechSynthesisUtterance(correctSentence);
+        const lang = detectLang(correctSentence);
+        utterance.lang = lang; utterance.pitch = 1.1; utterance.rate = 0.98; utterance.volume = 1;
+        const voice = voices.find(v => v.lang.startsWith(lang)); if (voice) utterance.voice = voice;
+        speechSynthesis.speak(utterance);
+        setTimeout(() => { currentTest++; loadTest(); }, 1800);
+      } else {
+        feedback.textContent = `❌ Xato! ${correctWords}/${correctOrder.length} to'g'ri. Qayta urinib ko'ring`;
+        feedback.style.color = '#ff6b6b';
+        if (navigator.vibrate) navigator.vibrate([140,60,140]);
+        setTimeout(() => { loadTest(); }, 1400);
+      }
+      totalWords += correctOrder.length;
+    }, dropWords.length * 90 + 350);
+  }, 700);
+}
+
+function showFinalResult() {
+  const percentage = totalWords === 0 ? 0 : Math.round((score / totalWords) * 100);
+  let starCount = 0;
+  if (percentage >= 90) starCount = 5;
+  else if (percentage >= 80) starCount = 4;
+  else if (percentage >= 70) starCount = 3;
+  else if (percentage >= 60) starCount = 2;
+  else if (percentage >= 50) starCount = 1;
+  document.getElementById('finalScore').textContent = `${score}/${totalWords}`;
+  document.getElementById('finalPercentage').textContent = `${percentage}% to'g'ri javob`;
+  const starsEl = document.getElementById('stars');
+  starsEl.innerHTML = '';
+  for (let i = 0; i < 5; i++) {
+    const star = document.createElement('span');
+    star.className = 'star'; star.textContent = '⭐';
+    if (i < starCount) {
+      setTimeout(() => { star.classList.add('filled'); if (navigator.vibrate) navigator.vibrate(36); }, i * 120);
+    }
+    starsEl.appendChild(star);
+  }
+  document.getElementById('resultModal').style.display = 'flex';
+  if (navigator.vibrate) { setTimeout(() => { navigator.vibrate([180,100,180]); }, 500); }
+}
+
+function restartTest() {
+  currentTest = 0; score = 0; totalWords = 0; selectedWords = []; document.getElementById('resultModal').style.display = 'none'; loadTest();
+}
+
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function (event) {
+  var now = (new Date()).getTime();
+  if (now - lastTouchEnd <= 300) event.preventDefault();
+  lastTouchEnd = now;
+}, false);
+document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+
+speechSynthesis.onvoiceschanged = loadVoices;
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

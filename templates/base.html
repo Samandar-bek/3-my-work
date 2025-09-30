@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English Tenses - Ultra Premium</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #000000;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      --gap: 5em;
+      --line: 1px;
+      --color: rgba(255, 255, 255, 0.2);
+      background-image: linear-gradient(
+          -90deg,
+          transparent calc(var(--gap) - var(--line)),
+          var(--color) calc(var(--gap) - var(--line) + 1px),
+          var(--color) var(--gap)
+        ),
+        linear-gradient(
+          0deg,
+          transparent calc(var(--gap) - var(--line)),
+          var(--color) calc(var(--gap) - var(--line) + 1px),
+          var(--color) var(--gap)
+        );
+      background-size: var(--gap) var(--gap);
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      25% { background-position: 50% 75%; }
+      50% { background-position: 100% 50%; }
+      75% { background-position: 50% 25%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes patternMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 60px 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 48px;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 60px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 4px 20px rgba(102, 126, 234, 0.4));
+      animation: titleFloat 3s ease-in-out infinite;
+      position: relative;
+    }
+
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 4px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      border-radius: 2px;
+      animation: lineExpand 2s ease-in-out infinite;
+    }
+
+    @keyframes titleFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes lineExpand {
+      0%, 100% { width: 120px; opacity: 1; }
+      50% { width: 180px; opacity: 0.7; }
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 35px;
+    }
+
+    .card {
+      background: #212121;
+      backdrop-filter: blur(20px) saturate(180%);
+      border-radius: 30px;
+      padding: 35px 28px;
+      box-shadow: 15px 15px 30px rgb(25, 25, 25),
+                  -15px -15px 30px rgb(60, 60, 60);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(102, 126, 234, 0.15) 0%, transparent 70%);
+      transform: scale(0);
+      transition: transform 0.6s ease;
+    }
+
+    .card:hover::before {
+      transform: scale(1);
+    }
+
+    .card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 20px 20px 40px rgb(20, 20, 20),
+                  -20px -20px 40px rgb(70, 70, 70),
+                  0 0 40px rgba(102, 126, 234, 0.3);
+      border-color: rgba(102, 126, 234, 0.3);
+    }
+
+    .card h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      text-align: center;
+      color: #fff;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 2px 8px rgba(102, 126, 234, 0.3));
+    }
+
+    .subtense {
+      margin-top: 16px;
+      padding: 16px 20px;
+      border: 2px solid transparent;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(248, 249, 252, 0.08));
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      z-index: 2;
+      font-weight: 500;
+      color: #e0e0e0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .subtense::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      padding: 2px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .subtense:hover::before {
+      opacity: 1;
+    }
+
+    .subtense:hover {
+      transform: translateX(8px) scale(1.03);
+      box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(248, 249, 252, 0.12));
+    }
+
+    .levels {
+      position: absolute;
+      bottom: 110%;
+      left: 50%;
+      transform: translateX(-50%) scale(0.85);
+      opacity: 0;
+      display: none;
+      flex-direction: row;
+      gap: 8px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(248, 249, 252, 0.98));
+      backdrop-filter: blur(25px) saturate(180%);
+      border-radius: 60px;
+      padding: 8px;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12), 0 5px 15px rgba(102, 126, 234, 0.1);
+      z-index: 999;
+      border: 2px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .levels a {
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+
+    .levels a::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+    }
+
+    .levels a:hover::before {
+      width: 400px;
+      height: 400px;
+    }
+
+    .levels a span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .levels a.easy {
+      background: linear-gradient(135deg, #81c784 0%, #66bb6a 50%, #4caf50 100%);
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(76, 175, 80, 0.35);
+    }
+    .levels a.easy:hover {
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 10px 30px rgba(76, 175, 80, 0.5);
+    }
+    .levels a.easy:active {
+      transform: translateY(-2px) scale(1.05);
+    }
+
+    .levels a.normal {
+      background: linear-gradient(135deg, #ffb74d 0%, #ffa726 50%, #ff9800 100%);
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(255, 152, 0, 0.35);
+    }
+    .levels a.normal:hover {
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 10px 30px rgba(255, 152, 0, 0.5);
+    }
+    .levels a.normal:active {
+      transform: translateY(-2px) scale(1.05);
+    }
+
+    .levels a.hard {
+      background: linear-gradient(135deg, #ef5350 0%, #e53935 50%, #d32f2f 100%);
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(229, 57, 53, 0.35);
+    }
+    .levels a.hard:hover {
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 10px 30px rgba(229, 57, 53, 0.5);
+    }
+    .levels a.hard:active {
+      transform: translateY(-2px) scale(1.05);
+    }
+
+    .subtense.show .levels {
+      display: flex;
+      animation: dropBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes dropBounce {
+      0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px) scale(0.7);
+      }
+      60% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-5px) scale(1.05);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .container {
+        padding: 40px 20px;
+      }
+
+      h1 {
+        font-size: 40px;
+        margin-bottom: 40px;
+      }
+
+      .grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+      }
+
+      .card {
+        padding: 28px 22px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 30px 15px;
+      }
+
+      h1 {
+        font-size: 32px;
+        margin-bottom: 35px;
+      }
+
+      h1::after {
+        width: 80px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .card {
+        padding: 24px 18px;
+        border-radius: 20px;
+      }
+      
+      .card h2 {
+        font-size: 22px;
+        margin-bottom: 18px;
+      }
+
+      .subtense {
+        padding: 14px 16px;
+        font-size: 14px;
+        margin-top: 12px;
+      }
+
+      .levels {
+        flex-direction: row;
+        gap: 6px;
+        bottom: 115%;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        width: auto;
+        margin: 0;
+        padding: 6px;
+        border-radius: 50px;
+      }
+
+      .levels a {
+        padding: 10px 18px;
+        font-size: 11px;
+        width: auto;
+        min-width: 70px;
+      }
+
+      @keyframes dropBounce {
+        0% {
+          opacity: 0;
+          transform: translateX(-50%) translateY(20px) scale(0.9);
+        }
+        60% {
+          opacity: 1;
+          transform: translateX(-50%) translateY(-5px) scale(1.02);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0) scale(1);
+        }
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px 12px;
+      }
+
+      h1 {
+        font-size: 26px;
+        margin-bottom: 30px;
+      }
+
+      .card {
+        padding: 20px 15px;
+        border-radius: 18px;
+      }
+
+      .card h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+      }
+
+      .subtense {
+        padding: 12px 14px;
+        font-size: 13px;
+        border-radius: 14px;
+      }
+
+      .levels {
+        gap: 4px;
+        padding: 5px;
+        border-radius: 40px;
+      }
+
+      .levels a {
+        padding: 8px 14px;
+        font-size: 10px;
+        border-radius: 40px;
+        min-width: 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>English Tenses - Ultra Premium</h1>
+    <div class="grid">
+
+      <!-- Present -->
+      <div class="card">
+        <h2>Present</h2>
+        <div class="subtense" onclick="toggleLevels(this)">Present Simple
+          <div class="levels">
+            <a href="present_simple_easy.html" class="easy">Easy</a>
+            <a href="present_simple_normal.html" class="normal">Normal</a>
+            <a href="present_simple_hard.html" class="hard">Hard</a>
+          </div>
+        </div>
+        <div class="subtense" onclick="toggleLevels(this)">Present Continuous
+          <div class="levels">
+            <a href="present_continuous_easy.html" class="easy">Easy</a>
+            <a href="present_continuous_normal.html" class="normal">Normal</a>
+            <a href="present_continuous_hard.html" class="hard">Hard</a>
+          </div>
+        </div>
+        <div class="subtense" onclick="toggleLevels(this)">Present Perfect
+          <div class="levels">
+            <a href="present_perfect_easy.html" class="easy">Easy</a>
+            <a href="present_perfect_normal.html" class="normal">Normal</a>
+            <a href="present_perfect_hard.html" class="hard">Hard</a>
+          </div>
+        </div>
+        <div class="subtense" onclick="toggleLevels(this)">Present Perfect Continuous
+          <div class="levels">
+            <a href="present_perfect_cont_easy.html" class="easy">Easy</a>
+            <a href="present_perfect_cont_normal.html" class="normal">Normal</a>
+            <a href="present_perfect_cont_hard.html" class="hard">Hard</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Past -->
+      <div class="card">
+        <h2>Past</h2>
+        <div class="subtense" onclick="toggleLevels(this)">Past Simple
+          <div class="levels">
+            <a href="past_simple_easy.html" class="easy">Easy</a>
+            <a href="past_simple_normal.html" class="normal">Normal</a>
+            <a href="past_simple_hard.html" class="hard">Hard</a>
+          </div>
+        </div>
+        <div class="subtense" onclick="toggleLevels(this)">Past Continuous
+          <div class="levels">
+            <a href="past_continuous_easy.html" class="easy">Easy</a>
+            <a href="past_continuous_normal.html" class="normal">Normal</a>
+            <a href="past_continuous_hard.html" class="hard">Hard</a>
+          </div>
+        </div>
+        <div class="subtense" onclick="toggleLevels(this)">Past Perfect
+          <div class="levels">
+            <a href="past_perfect_easy.html" class="easy">Easy</a>
+            <a href="past_perfect_normal.html" class="normal">Normal</a>
+            <a href="past_perfect_hard.html" class="hard">Hard</a>
+          </div>
+        </div>
+        <div class="subtense" onclick="toggleLevels(this)">Past Perfect Continuous
+          <div class="levels">
+            <a href="past_perfect_cont_easy.html" class="easy">Easy</a>
+            <a href="past_perfect_cont_normal.html" class="normal">Normal</a>
+            <a href="past_perfect_cont_hard.html" class="hard">Hard</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Future -->
+      <div class="card">
+        <h2>Future</h2>
+        <div class="subtense" onclick="toggleLevels(this)">Future Simple
+          <div class="levels">
+            <a href="future_simple_easy.html" class="easy">Easy</a>
+            <a href="future_simple_normal.html" class="normal">Normal</a>
+            <a href="future_simple_hard.html" class="hard">Hard</a>
+          </div>
+        </div>
+        <div class="subtense" onclick="toggleLevels(this)">Future Continuous
+          <div class="levels">
+            <a href="future_continuous_easy.html" class="easy">Easy</a>
+            <a href="future_continuous_normal.html" class="normal">Normal</a>
+            <a href="future_continuous_hard.html" class="hard">Hard</a>
+          </div>
+        </div>
+        <div class="subtense" onclick="toggleLevels(this)">Future Perfect
+          <div class="levels">
+            <a href="future_perfect_easy.html" class="easy">Easy</a>
+            <a href="future_perfect_normal.html" class="normal">Normal</a>
+            <a href="future_perfect_hard.html" class="hard">Hard</a>
+          </div>
+        </div>
+        <div class="subtense" onclick="toggleLevels(this)">Future Perfect Continuous
+          <div class="levels">
+            <a href="future_perfect_cont_easy.html" class="easy">Easy</a>
+            <a href="future_perfect_cont_normal.html" class="normal">Normal</a>
+            <a href="future_perfect_cont_hard.html" class="hard">Hard</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function toggleLevels(element) {
+      document.querySelectorAll('.subtense').forEach(el => {
+        if (el !== element) el.classList.remove('show');
+      });
+      element.classList.toggle('show');
+    }
+  </script>
+</body>
+</html>
