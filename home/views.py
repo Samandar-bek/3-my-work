@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Asosiy sahifa
 def base_page(request):
-    return render(request, 'base.html')
+    return render(request, 'index.html')
 
 # Present
 def present_simple_easy(request): return render(request, 'present_simple_easy.html')
