@@ -667,59 +667,6 @@ body {
 
 <script>
 
-const tests = [
-  {uz: "Men ertaga soat 7 da yugurayotgan bo‘laman", en: ["I", "will", "be", "running", "at", "7", "tomorrow"]},
-  {uz: "U ertaga maktabga ketayotgan bo‘ladi", en: ["He", "will", "be", "going", "to", "school", "tomorrow"]},
-  {uz: "Biz kechqurun film tomosha qilayotgan bo‘lamiz", en: ["We", "will", "be", "watching", "a", "movie", "in", "the", "evening"]},
-  {uz: "U ertaga uyda dam olayotgan bo‘ladi", en: ["She", "will", "be", "resting", "at", "home", "tomorrow"]},
-  {uz: "Men ertaga kitob o‘qiyotgan bo‘laman", en: ["I", "will", "be", "reading", "a", "book", "tomorrow"]},
-  {uz: "U ishxonada ishlayotgan bo‘ladi", en: ["He", "will", "be", "working", "at", "the", "office"]},
-  {uz: "Biz bog‘da sayr qilayotgan bo‘lamiz", en: ["We", "will", "be", "walking", "in", "the", "park"]},
-  {uz: "U ertaga choy ichayotgan bo‘ladi", en: ["She", "will", "be", "drinking", "tea", "tomorrow"]},
-  {uz: "Men ertaga telefon bilan o‘ynayotgan bo‘laman", en: ["I", "will", "be", "playing", "with", "my", "phone", "tomorrow"]},
-  {uz: "U ertaga ovqat tayyorlayotgan bo‘ladi", en: ["He", "will", "be", "cooking", "food", "tomorrow"]},
-  {uz: "Biz ertaga sport bilan shug‘ullanayotgan bo‘lamiz", en: ["We", "will", "be", "doing", "sports", "tomorrow"]},
-  {uz: "U kechqurun televizor tomosha qilayotgan bo‘ladi", en: ["She", "will", "be", "watching", "TV", "in", "the", "evening"]},
-  {uz: "Men ertaga dars qilayotgan bo‘laman", en: ["I", "will", "be", "studying", "tomorrow"]},
-  {uz: "U ertaga do‘stlar bilan uchrashayotgan bo‘ladi", en: ["He", "will", "be", "meeting", "friends", "tomorrow"]},
-  {uz: "Biz ertaga yangi film tomosha qilayotgan bo‘lamiz", en: ["We", "will", "be", "watching", "a", "new", "movie", "tomorrow"]},
-  {uz: "U ertaga kitob yozayotgan bo‘ladi", en: ["She", "will", "be", "writing", "a", "book", "tomorrow"]},
-  {uz: "Men ertaga mashina haytayotgan bo‘laman", en: ["I", "will", "be", "driving", "a", "car", "tomorrow"]},
-  {uz: "U kechqurun musiqa tinglayotgan bo‘ladi", en: ["He", "will", "be", "listening", "to", "music", "in", "the", "evening"]},
-  {uz: "Biz ertaga yangi retsept tayyorlayotgan bo‘lamiz", en: ["We", "will", "be", "preparing", "a", "new", "recipe", "tomorrow"]},
-  {uz: "U ertaga do‘konlarda xarid qilayotgan bo‘ladi", en: ["She", "will", "be", "shopping", "in", "the", "shops", "tomorrow"]},
-  {uz: "Men ertaga rasm chizayotgan bo‘laman", en: ["I", "will", "be", "drawing", "tomorrow"]},
-  {uz: "U ertaga sport zalida mashq qilayotgan bo‘ladi", en: ["He", "will", "be", "exercising", "in", "the", "gym", "tomorrow"]},
-  {uz: "Biz ertaga bog‘da kitob o‘qiyotgan bo‘lamiz", en: ["We", "will", "be", "reading", "in", "the", "park", "tomorrow"]},
-  {uz: "U kechqurun televizor tomosha qilayotgan bo‘ladi", en: ["She", "will", "be", "watching", "TV", "in", "the", "evening"]},
-  {uz: "Men ertaga nonushta qilayotgan bo‘laman", en: ["I", "will", "be", "having", "breakfast", "tomorrow"]},
-  {uz: "U ertaga maktabga borayotgan bo‘ladi", en: ["He", "will", "be", "going", "to", "school", "tomorrow"]},
-  {uz: "Biz ertaga avtobusda ketayotgan bo‘lamiz", en: ["We", "will", "be", "traveling", "by", "bus", "tomorrow"]},
-  {uz: "U ertaga dars tayyorlayotgan bo‘ladi", en: ["She", "will", "be", "preparing", "lessons", "tomorrow"]},
-  {uz: "Men ertaga yangi film tomosha qilayotgan bo‘laman", en: ["I", "will", "be", "watching", "a", "new", "movie", "tomorrow"]},
-  {uz: "U kechqurun uy vazifasi qilayotgan bo‘ladi", en: ["He", "will", "be", "doing", "homework", "in", "the", "evening"]},
-  {uz: "Biz ertaga parkda yugurayotgan bo‘lamiz", en: ["We", "will", "be", "running", "in", "the", "park", "tomorrow"]},
-  {uz: "U ertaga telefon bilan o‘ynayotgan bo‘ladi", en: ["She", "will", "be", "playing", "with", "her", "phone", "tomorrow"]},
-  {uz: "Men ertaga darsga borayotgan bo‘laman", en: ["I", "will", "be", "going", "to", "class", "tomorrow"]},
-  {uz: "U ertaga yangi kitob o‘qiyotgan bo‘ladi", en: ["He", "will", "be", "reading", "a", "new", "book", "tomorrow"]},
-  {uz: "Biz ertaga uy ishlarini qilayotgan bo‘lamiz", en: ["We", "will", "be", "doing", "housework", "tomorrow"]},
-  {uz: "U kechqurun musiqa chalayotgan bo‘ladi", en: ["She", "will", "be", "playing", "music", "in", "the", "evening"]},
-  {uz: "Men ertaga yangi o‘yin o‘ynayotgan bo‘laman", en: ["I", "will", "be", "playing", "a", "new", "game", "tomorrow"]},
-  {uz: "U ertaga do‘stlari bilan uchrashayotgan bo‘ladi", en: ["He", "will", "be", "meeting", "friends", "tomorrow"]},
-  {uz: "Biz ertaga kino tomosha qilayotgan bo‘lamiz", en: ["We", "will", "be", "watching", "a", "movie", "tomorrow"]},
-  {uz: "U ertaga oshpazlik qilayotgan bo‘ladi", en: ["She", "will", "be", "cooking", "tomorrow"]},
-  {uz: "Men ertaga bog‘ga borayotgan bo‘laman", en: ["I", "will", "be", "going", "to", "the", "garden", "tomorrow"]},
-  {uz: "U ertaga sport bilan shug‘ullanayotgan bo‘ladi", en: ["He", "will", "be", "doing", "sports", "tomorrow"]},
-  {uz: "Biz ertaga yangi mashina haydab ko‘rayotgan bo‘lamiz", en: ["We", "will", "be", "driving", "a", "new", "car", "tomorrow"]},
-  {uz: "U kechqurun rasm chizayotgan bo‘ladi", en: ["She", "will", "be", "drawing", "in", "the", "evening"]},
-  {uz: "Men ertaga yangi retsept sinab ko‘rayotgan bo‘laman", en: ["I", "will", "be", "trying", "a", "new", "recipe", "tomorrow"]},
-  {uz: "U ertaga bog‘da sayr qilayotgan bo‘ladi", en: ["He", "will", "be", "walking", "in", "the", "garden", "tomorrow"]},
-  {uz: "Biz ertaga televizor tomosha qilayotgan bo‘lamiz", en: ["We", "will", "be", "watching", "TV", "tomorrow"]},
-  {uz: "U ertaga yangi kitob yozayotgan bo‘ladi", en: ["She", "will", "be", "writing", "a", "new", "book", "tomorrow"]},
-  {uz: "Men ertaga nonushta qilayotgan bo‘laman", en: ["I", "will", "be", "having", "breakfast", "tomorrow"]},
-  {uz: "U ertaga yangi o‘yin o‘ynayotgan bo‘ladi", en: ["He", "will", "be", "playing", "a", "new", "game", "tomorrow"]}
-];
-
 
 let currentTest = 0;
 let score = 0;
@@ -994,7 +941,60 @@ document.addEventListener('click', function initAudio() {
     audioInitialized = true;
     loadVoices();
   }
-}, { once: true });
+}, { once: true });const tests = [
+  {uz: "Men ertaga soat 7 da yugurayotgan bo‘laman", en: ["I", "will", "be", "running", "at", "7", "tomorrow"]},
+  {uz: "U ertaga maktabga ketayotgan bo‘ladi", en: ["He", "will", "be", "going", "to", "school", "tomorrow"]},
+  {uz: "Biz kechqurun film tomosha qilayotgan bo‘lamiz", en: ["We", "will", "be", "watching", "a", "movie", "in", "the", "evening"]},
+  {uz: "U ertaga uyda dam olayotgan bo‘ladi", en: ["She", "will", "be", "resting", "at", "home", "tomorrow"]},
+  {uz: "Men ertaga kitob o‘qiyotgan bo‘laman", en: ["I", "will", "be", "reading", "a", "book", "tomorrow"]},
+  {uz: "U ishxonada ishlayotgan bo‘ladi", en: ["He", "will", "be", "working", "at", "the", "office"]},
+  {uz: "Biz bog‘da sayr qilayotgan bo‘lamiz", en: ["We", "will", "be", "walking", "in", "the", "park"]},
+  {uz: "U ertaga choy ichayotgan bo‘ladi", en: ["She", "will", "be", "drinking", "tea", "tomorrow"]},
+  {uz: "Men ertaga telefon bilan o‘ynayotgan bo‘laman", en: ["I", "will", "be", "playing", "with", "my", "phone", "tomorrow"]},
+  {uz: "U ertaga ovqat tayyorlayotgan bo‘ladi", en: ["He", "will", "be", "cooking", "food", "tomorrow"]},
+  {uz: "Biz ertaga sport bilan shug‘ullanayotgan bo‘lamiz", en: ["We", "will", "be", "doing", "sports", "tomorrow"]},
+  {uz: "U kechqurun televizor tomosha qilayotgan bo‘ladi", en: ["She", "will", "be", "watching", "TV", "in", "the", "evening"]},
+  {uz: "Men ertaga dars qilayotgan bo‘laman", en: ["I", "will", "be", "studying", "tomorrow"]},
+  {uz: "U ertaga do‘stlar bilan uchrashayotgan bo‘ladi", en: ["He", "will", "be", "meeting", "friends", "tomorrow"]},
+  {uz: "Biz ertaga yangi film tomosha qilayotgan bo‘lamiz", en: ["We", "will", "be", "watching", "a", "new", "movie", "tomorrow"]},
+  {uz: "U ertaga kitob yozayotgan bo‘ladi", en: ["She", "will", "be", "writing", "a", "book", "tomorrow"]},
+  {uz: "Men ertaga mashina haytayotgan bo‘laman", en: ["I", "will", "be", "driving", "a", "car", "tomorrow"]},
+  {uz: "U kechqurun musiqa tinglayotgan bo‘ladi", en: ["He", "will", "be", "listening", "to", "music", "in", "the", "evening"]},
+  {uz: "Biz ertaga yangi retsept tayyorlayotgan bo‘lamiz", en: ["We", "will", "be", "preparing", "a", "new", "recipe", "tomorrow"]},
+  {uz: "U ertaga do‘konlarda xarid qilayotgan bo‘ladi", en: ["She", "will", "be", "shopping", "in", "the", "shops", "tomorrow"]},
+  {uz: "Men ertaga rasm chizayotgan bo‘laman", en: ["I", "will", "be", "drawing", "tomorrow"]},
+  {uz: "U ertaga sport zalida mashq qilayotgan bo‘ladi", en: ["He", "will", "be", "exercising", "in", "the", "gym", "tomorrow"]},
+  {uz: "Biz ertaga bog‘da kitob o‘qiyotgan bo‘lamiz", en: ["We", "will", "be", "reading", "in", "the", "park", "tomorrow"]},
+  {uz: "U kechqurun televizor tomosha qilayotgan bo‘ladi", en: ["She", "will", "be", "watching", "TV", "in", "the", "evening"]},
+  {uz: "Men ertaga nonushta qilayotgan bo‘laman", en: ["I", "will", "be", "having", "breakfast", "tomorrow"]},
+  {uz: "U ertaga maktabga borayotgan bo‘ladi", en: ["He", "will", "be", "going", "to", "school", "tomorrow"]},
+  {uz: "Biz ertaga avtobusda ketayotgan bo‘lamiz", en: ["We", "will", "be", "traveling", "by", "bus", "tomorrow"]},
+  {uz: "U ertaga dars tayyorlayotgan bo‘ladi", en: ["She", "will", "be", "preparing", "lessons", "tomorrow"]},
+  {uz: "Men ertaga yangi film tomosha qilayotgan bo‘laman", en: ["I", "will", "be", "watching", "a", "new", "movie", "tomorrow"]},
+  {uz: "U kechqurun uy vazifasi qilayotgan bo‘ladi", en: ["He", "will", "be", "doing", "homework", "in", "the", "evening"]},
+  {uz: "Biz ertaga parkda yugurayotgan bo‘lamiz", en: ["We", "will", "be", "running", "in", "the", "park", "tomorrow"]},
+  {uz: "U ertaga telefon bilan o‘ynayotgan bo‘ladi", en: ["She", "will", "be", "playing", "with", "her", "phone", "tomorrow"]},
+  {uz: "Men ertaga darsga borayotgan bo‘laman", en: ["I", "will", "be", "going", "to", "class", "tomorrow"]},
+  {uz: "U ertaga yangi kitob o‘qiyotgan bo‘ladi", en: ["He", "will", "be", "reading", "a", "new", "book", "tomorrow"]},
+  {uz: "Biz ertaga uy ishlarini qilayotgan bo‘lamiz", en: ["We", "will", "be", "doing", "housework", "tomorrow"]},
+  {uz: "U kechqurun musiqa chalayotgan bo‘ladi", en: ["She", "will", "be", "playing", "music", "in", "the", "evening"]},
+  {uz: "Men ertaga yangi o‘yin o‘ynayotgan bo‘laman", en: ["I", "will", "be", "playing", "a", "new", "game", "tomorrow"]},
+  {uz: "U ertaga do‘stlari bilan uchrashayotgan bo‘ladi", en: ["He", "will", "be", "meeting", "friends", "tomorrow"]},
+  {uz: "Biz ertaga kino tomosha qilayotgan bo‘lamiz", en: ["We", "will", "be", "watching", "a", "movie", "tomorrow"]},
+  {uz: "U ertaga oshpazlik qilayotgan bo‘ladi", en: ["She", "will", "be", "cooking", "tomorrow"]},
+  {uz: "Men ertaga bog‘ga borayotgan bo‘laman", en: ["I", "will", "be", "going", "to", "the", "garden", "tomorrow"]},
+  {uz: "U ertaga sport bilan shug‘ullanayotgan bo‘ladi", en: ["He", "will", "be", "doing", "sports", "tomorrow"]},
+  {uz: "Biz ertaga yangi mashina haydab ko‘rayotgan bo‘lamiz", en: ["We", "will", "be", "driving", "a", "new", "car", "tomorrow"]},
+  {uz: "U kechqurun rasm chizayotgan bo‘ladi", en: ["She", "will", "be", "drawing", "in", "the", "evening"]},
+  {uz: "Men ertaga yangi retsept sinab ko‘rayotgan bo‘laman", en: ["I", "will", "be", "trying", "a", "new", "recipe", "tomorrow"]},
+  {uz: "U ertaga bog‘da sayr qilayotgan bo‘ladi", en: ["He", "will", "be", "walking", "in", "the", "garden", "tomorrow"]},
+  {uz: "Biz ertaga televizor tomosha qilayotgan bo‘lamiz", en: ["We", "will", "be", "watching", "TV", "tomorrow"]},
+  {uz: "U ertaga yangi kitob yozayotgan bo‘ladi", en: ["She", "will", "be", "writing", "a", "new", "book", "tomorrow"]},
+  {uz: "Men ertaga nonushta qilayotgan bo‘laman", en: ["I", "will", "be", "having", "breakfast", "tomorrow"]},
+  {uz: "U ertaga yangi o‘yin o‘ynayotgan bo‘ladi", en: ["He", "will", "be", "playing", "a", "new", "game", "tomorrow"]}
+];
+
+
 </script>
 </body>
 </html><!DOCTYPE html>
