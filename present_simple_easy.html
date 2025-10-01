@@ -524,6 +524,7 @@ body {
 </div>
 
 <script>
+// TESTLAR
 const tests = [
   {uz: "Men kitob o'qiyman", en: ["I","read","a","book"]},
   {uz: "U maktabga boradi", en: ["He","goes","to","school"]},
@@ -577,6 +578,7 @@ const tests = [
   {uz: "U jahon iqtisodiyotini tahlil qiladi", en: ["He","analyzes","the","global","economy"]}
 ];
 
+// GLOBAL VARIABLES
 let currentTest = 0;
 let score = 0;
 let totalWords = 0;
@@ -584,10 +586,12 @@ let isChecking = false;
 let selectedWords = [];
 let voices = [];
 
+// OVOZ YUKLASH
 function loadVoices() {
   voices = speechSynthesis.getVoices();
 }
 
+// OVOZ CHIQARISH
 function speakText(text) {
   return new Promise((resolve) => {
     try {
@@ -610,50 +614,46 @@ function speakText(text) {
   });
 }
 
+// TESTNI YUKLASH
 function loadTest() {
-  console.log('Loading test:', currentTest);
-  
   if (currentTest >= tests.length) { 
     showFinalResult(); 
     return; 
   }
   
   const test = tests[currentTest];
-  document.getElementById('uzbek-text').textContent = test.uz;
-  document.getElementById('currentTest').textContent = currentTest + 1;
-  document.getElementById('progressFill').style.width = ((currentTest / tests.length) * 100) + '%';
-  document.getElementById('feedback').textContent = '';
-  selectedWords = [];
-  isChecking = false;
-  
+  const uzbekText = document.getElementById('uzbek-text');
+  const currentTestEl = document.getElementById('currentTest');
+  const progressFill = document.getElementById('progressFill');
+  const feedback = document.getElementById('feedback');
   const dropZone = document.getElementById('dropZone');
   const wordsGrid = document.getElementById('wordsGrid');
+  const clearBtn = document.getElementById('clearBtn');
   
-  if (!dropZone || !wordsGrid) {
-    console.error('Elements not found!');
-    return;
-  }
+  uzbekText.textContent = test.uz;
+  currentTestEl.textContent = currentTest + 1;
+  progressFill.style.width = ((currentTest / tests.length) * 100) + '%';
+  feedback.textContent = '';
+  selectedWords = [];
+  isChecking = false;
   
   dropZone.innerHTML = '';
   dropZone.classList.add('drop-zone-empty');
   wordsGrid.innerHTML = '';
-  document.getElementById('clearBtn').style.display = 'none';
+  clearBtn.style.display = 'none';
   
   const shuffledWords = [...test.en].sort(() => Math.random() - 0.5);
   
-  console.log('Creating words:', shuffledWords);
-  
-  shuffledWords.forEach((word, index) => {
+  shuffledWords.forEach((word) => {
     const wordDiv = document.createElement('div');
     wordDiv.className = 'word-block';
     wordDiv.textContent = word;
     wordDiv.onclick = function() { selectWord(this, word); };
     wordsGrid.appendChild(wordDiv);
   });
-  
-  console.log('Words created:', wordsGrid.children.length);
 }
 
+// SO'Z TANLASH
 function selectWord(wordElement, word) {
   if (isChecking) return;
   if (navigator.vibrate) navigator.vibrate(25);
@@ -675,7 +675,6 @@ function selectWord(wordElement, word) {
   wordElement.style.opacity = '0.35';
   wordElement.style.pointerEvents = 'none';
   
-  // Tozalash tugmasini ko'rsatish
   document.getElementById('clearBtn').style.display = 'block';
   
   const correctOrder = tests[currentTest].en;
@@ -684,6 +683,7 @@ function selectWord(wordElement, word) {
   }
 }
 
+// SO'ZNI O'CHIRISH
 function removeWord(word) {
   if (isChecking) return;
   if (navigator.vibrate) navigator.vibrate(25);
@@ -712,24 +712,46 @@ function removeWord(word) {
   });
 }
 
+// BARCHASINI TOZALASH
 function clearAll() {
   if (isChecking) return;
-  if (navigator.vibrate) navigator.vibrate(50);
+  if (navigator.vibrate) navigator.vibrate([50, 30, 50]);
   
-  const wordsGrid = document.getElementById('wordsGrid');
-  const allWords = wordsGrid.querySelectorAll('.word-block');
-  allWords.forEach(el => {
-    el.style.opacity = '1';
-    el.style.pointerEvents = 'auto';
-  });
+  const clearBtn = document.getElementById('clearBtn');
+  clearBtn.style.animation = 'clearShake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97)';
   
-  selectedWords = [];
-  const dropZone = document.getElementById('dropZone');
-  dropZone.innerHTML = '';
-  dropZone.classList.add('drop-zone-empty');
-  document.getElementById('clearBtn').style.display = 'none';
+  setTimeout(() => {
+    const wordsGrid = document.getElementById('wordsGrid');
+    const allWords = wordsGrid.querySelectorAll('.word-block');
+    
+    allWords.forEach((el, index) => {
+      setTimeout(() => {
+        el.style.opacity = '1';
+        el.style.pointerEvents = 'auto';
+        el.style.animation = 'selectBounce 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      }, index * 40);
+    });
+    
+    selectedWords = [];
+    const dropZone = document.getElementById('dropZone');
+    const dropWords = dropZone.querySelectorAll('.word-block');
+    
+    dropWords.forEach((el, index) => {
+      setTimeout(() => {
+        el.style.animation = 'wrongShake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97)';
+        setTimeout(() => el.remove(), 400);
+      }, index * 40);
+    });
+    
+    setTimeout(() => {
+      dropZone.innerHTML = '';
+      dropZone.classList.add('drop-zone-empty');
+      clearBtn.style.display = 'none';
+    }, allWords.length * 40 + 400);
+  }, 100);
 }
 
+// JAVOBNI TEKSHIRISH
 function checkAnswer() {
   if (isChecking) return;
   isChecking = true;
@@ -768,6 +790,124 @@ function checkAnswer() {
         if (navigator.vibrate) navigator.vibrate([70,30,70]);
         
         await speakText(correctOrder.join(' '));
+        
+        setTimeout(() => { 
+          currentTest++; 
+          loadTest(); 
+        }, 800);
+      } else {
+        feedback.textContent = `❌ Xato! ${correctWords}/${correctOrder.length} to'g'ri. Qayta urinib ko'ring`;
+        feedback.style.color = '#ff6b6b';
+        if (navigator.vibrate) navigator.vibrate([140,60,140]);
+        
+        setTimeout(() => { 
+          loadTest(); 
+        }, 1800);
+      }
+      totalWords += correctOrder.length;
+    }, dropWords.length * 90 + 350);
+  }, 700);
+}
+
+// YAKUNIY NATIJA
+function showFinalResult() {
+  const percentage = totalWords === 0 ? 0 : Math.round((score / totalWords) * 100);
+  let starCount = 0;
+  if (percentage >= 90) starCount = 5;
+  else if (percentage >= 80) starCount = 4;
+  else if (percentage >= 70) starCount = 3;
+  else if (percentage >= 60) starCount = 2;
+  else if (percentage >= 50) starCount = 1;
+  
+  document.getElementById('finalScore').textContent = `${score}/${totalWords}`;
+  document.getElementById('finalPercentage').textContent = `${percentage}% to'g'ri javob`;
+  
+  const starsEl = document.getElementById('stars');
+  starsEl.innerHTML = '';
+  for (let i = 0; i < 5; i++) {
+    const star = document.createElement('span');
+    star.className = 'star'; 
+    star.textContent = '⭐';
+    if (i < starCount) {
+      setTimeout(() => { 
+        star.classList.add('filled'); 
+        if (navigator.vibrate) navigator.vibrate(36); 
+      }, i * 120);
+    }
+    starsEl.appendChild(star);
+  }
+  
+  document.getElementById('resultModal').style.display = 'flex';
+  if (navigator.vibrate) { 
+    setTimeout(() => { 
+      navigator.vibrate([180,100,180]); 
+    }, 500); 
+  }
+}
+
+// QAYTA BOSHLASH
+function restartTest() {
+  currentTest = 0; 
+  score = 0; 
+  totalWords = 0; 
+  selectedWords = []; 
+  document.getElementById('resultModal').style.display = 'none'; 
+  loadTest();
+}
+
+// ILOVANI BOSHLASH
+function startApp() {
+  loadVoices();
+  loadTest();
+}
+
+// Sahifa tayyor bo'lganda
+window.addEventListener('load', startApp);
+document.addEventListener('DOMContentLoaded', startApp);
+
+// Ovoz uchun
+if ('speechSynthesis' in window) {
+  speechSynthesis.addEventListener('voiceschanged', loadVoices);
+}
+
+// Birinchi klik/touch da ham ishga tushirish
+let appStarted = false;
+document.addEventListener('click', function() {
+  if (!appStarted) {
+    appStarted = true;
+    startApp();
+  }
+}, { once: true });
+
+document.addEventListener('touchstart', function() {
+  if (!appStarted) {
+    appStarted = true;
+    startApp();
+  }
+}, { once: true });
+
+// Double-tap oldini olish
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function (event) {
+  const now = (new Date()).getTime();
+  if (now - lastTouchEnd <= 300) event.preventDefault();
+  lastTouchEnd = now;
+}, false);
+
+document.addEventListener('contextmenu', function(e) { 
+  e.preventDefault(); 
+});
+
+// 3 soniya ichida yuklanmasa majburiy yuklash
+setTimeout(function() {
+  const wordsGrid = document.getElementById('wordsGrid');
+  if (wordsGrid && wordsGrid.children.length === 0) {
+    startApp();
+  }
+}, 3000);
+</script>
+</body>
+</html>await speakText(correctOrder.join(' '));
         
         setTimeout(() => { 
           currentTest++; 
