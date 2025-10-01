@@ -250,25 +250,7 @@ body {
   width: 100%;
 }
 
-.clear-btn {
-  background: linear-gradient(135deg, rgba(255, 107, 107, 0.9), rgba(238, 90, 111, 0.9));
-  backdrop-filter: blur(15px);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 12px 24px;
-  border-radius: 24px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  margin: 0 auto 20px auto;
-  display: none;
-  width: 150px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 6px 24px rgba(255, 107, 107, 0.4);
-  font-family: 'Poppins', sans-serif;
-  position: relative;
-  overflow: hidden;
-}
+
 
 .clear-btn::before {
   content: '';
@@ -558,7 +540,6 @@ body {
 
     <div class="drop-zone drop-zone-empty" id="dropZone"></div>
     
-    <button class="clear-btn" onclick="clearAll()" id="clearBtn">🗑️ Tozalash</button>
     
     <div class="words-container">
       <div class="words-grid" id="wordsGrid"></div>
