@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Premium 50 Test - Luxury Edition</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  position: relative;
+  background: #0a1520;
+}
+
+.gradient-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background: linear-gradient(135deg, #0a1929 0%, #1a2f42 25%, #2a4a5e 50%, #3d6b8a 75%, #5a9bc4 100%);
+  background-size: 400% 400%;
+  animation: gradientFlow 20s ease infinite;
+}
+
+@keyframes gradientFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.orbs-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.5;
+  animation: float 30s infinite ease-in-out;
+}
+
+.orb1 { 
+  width: 400px; 
+  height: 400px; 
+  background: radial-gradient(circle, rgba(90,155,196,0.6), transparent); 
+  top: 5%; 
+  left: 5%; 
+  animation-delay: 0s; 
+}
+
+.orb2 { 
+  width: 500px; 
+  height: 500px; 
+  background: radial-gradient(circle, rgba(61,107,138,0.5), transparent); 
+  top: 50%; 
+  right: 10%; 
+  animation-delay: -10s; 
+}
+
+.orb3 { 
+  width: 350px; 
+  height: 350px; 
+  background: radial-gradient(circle, rgba(42,74,94,0.6), transparent); 
+  bottom: 15%; 
+  left: 25%; 
+  animation-delay: -20s; 
+}
+
+.orb4 { 
+  width: 450px; 
+  height: 450px; 
+  background: radial-gradient(circle, rgba(26,47,66,0.4), transparent); 
+  top: 35%; 
+  left: 50%; 
+  animation-delay: -5s; 
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  25% { transform: translate(50px, -60px) rotate(90deg) scale(1.15); }
+  50% { transform: translate(-40px, 50px) rotate(180deg) scale(0.85); }
+  75% { transform: translate(60px, 30px) rotate(270deg) scale(1.1); }
+}
+
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  background: rgba(90, 155, 196, 0.6);
+  border-radius: 50%;
+  animation: particleFloat 15s infinite ease-in-out;
+}
+
+@keyframes particleFloat {
+  0%, 100% { 
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { 
+    transform: translateY(-100vh) translateX(50px);
+    opacity: 0;
+  }
+}
+
+.main-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  max-width: 600px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-radius: 36px;
+  padding: 45px 36px;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4),
+              0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+              0 25px 80px rgba(90, 155, 196, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: containerEntry 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  animation: shimmer 4s infinite;
+}
+
+.container::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg, transparent, rgba(90, 155, 196, 0.4), transparent);
+  border-radius: 36px;
+  z-index: -1;
+  opacity: 0;
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+@keyframes containerEntry {
+  0% { opacity: 0; transform: scale(0.85) translateY(40px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.test-counter {
+  background: linear-gradient(135deg, #5a9bc4, #3d6b8a, #2a4a5e, #5a9bc4);
+  background-size: 300% 300%;
+  animation: gradientShift 5s ease infinite;
+  color: white;
+  padding: 16px 32px;
+  border-radius: 28px;
+  font-weight: 900;
+  font-size: 17px;
+  margin-bottom: 24px;
+  display: inline-block;
+  box-shadow: 0 10px 30px rgba(90, 155, 196, 0.5),
+              0 0 50px rgba(90, 155, 196, 0.25),
+              0 5px 15px rgba(0, 0, 0, 0.3) inset;
+  animation: counterPulse 1s ease-out, gradientShift 5s ease infinite;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.test-counter::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: rotate(45deg);
+  animation: counterShine 3s infinite;
+}
+
+@keyframes counterShine {
+  0% { transform: translateX(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) rotate(45deg); }
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes counterPulse {
+  0% { transform: scale(0.7); opacity: 0; }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.level-badge {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  margin-left: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  margin: 28px 0;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4) inset;
+  animation: progressEntry 1s ease-out 0.3s both;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #5a9bc4, #3d6b8a, #5a9bc4);
+  background-size: 200% 100%;
+  border-radius: 24px;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 0%;
+  box-shadow: 0 0 25px rgba(90, 155, 196, 0.8),
+              0 0 50px rgba(90, 155, 196, 0.4);
+  animation: progressGlow 2.5s ease-in-out infinite;
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: progressShine 2.5s infinite;
+}
+
+@keyframes progressShine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes progressGlow {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.3); }
+}
+
+@keyframes progressEntry {
+  from { opacity: 0; transform: scaleX(0.7); }
+  to { opacity: 1; transform: scaleX(1); }
+}
+
+#uzbek-text {
+  font-size: 1.6em;
+  font-weight: 900;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 24px;
+  line-height: 1.5;
+  animation: textEntry 1s ease-out 0.5s both;
+  font-family: 'Poppins', sans-serif;
+  text-shadow: 0 3px 25px rgba(90, 155, 196, 0.5),
+               0 0 50px rgba(90, 155, 196, 0.3);
+}
+
+@keyframes textEntry {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#feedback {
+  font-size: 1.15em;
+  font-weight: 800;
+  text-align: center;
+  min-height: 45px;
+  margin: 24px 0;
+  animation: feedbackEntry 1s ease-out 0.7s both;
+  text-shadow: 0 3px 15px rgba(0, 0, 0, 0.4);
+  font-family: 'Poppins', sans-serif;
+}
+
+@keyframes feedbackEntry {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.back-btn {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 16px 32px;
+  border-radius: 28px;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  margin: 0 auto 32px auto;
+  display: block;
+  width: 180px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+  animation: buttonEntry 1s ease-out 0.9s both;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.back-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(90, 155, 196, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.back-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(90, 155, 196, 0.4);
+  border-color: rgba(90, 155, 196, 0.5);
+}
+
+.back-btn:active {
+  transform: translateY(-2px);
+}
+
+@keyframes buttonEntry {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.drop-zone {
+  min-height: 120px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 3px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 28px;
+  padding: 24px;
+  margin-bottom: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: dropZoneEntry 1s ease-out 1.1s both;
+  backdrop-filter: blur(15px);
+}
+
+@keyframes dropZoneEntry {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.drop-zone:not(.drop-zone-empty) {
+  border-color: rgba(90, 155, 196, 0.7);
+  background: rgba(90, 155, 196, 0.12);
+  box-shadow: 0 0 40px rgba(90, 155, 196, 0.25),
+              0 0 80px rgba(90, 155, 196, 0.15) inset;
+  border-style: solid;
+}
+
+.drop-zone-empty::before {
+  content: "✨ So'zlarni tartib bilan joylang";
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 17px;
+  font-weight: 700;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  animation: pulseText 2.5s ease-in-out infinite;
+  font-family: 'Poppins', sans-serif;
+}
+
+@keyframes pulseText {
+  0%, 100% { opacity: 0.65; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+.words-container {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  padding: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  animation: wordsEntry 1s ease-out 1.3s both;
+  backdrop-filter: blur(15px);
+}
+
+@keyframes wordsEntry {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.words-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+
+.word-block {
+  padding: 16px 28px;
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: 24px;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 17px;
+  color: #0a1520;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18),
+              0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-align: center;
+  min-width: 80px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.word-block::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(90, 155, 196, 0.35);
+  transform: translate(-50%, -50%);
+  transition: width 0.7s, height 0.7s;
+}
+
+.word-block:hover::before {
+  width: 350px;
+  height: 350px;
+}
+
+.word-block:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 15px 40px rgba(90, 155, 196, 0.35),
+              0 0 0 2px rgba(90, 155, 196, 0.4) inset;
+}
+
+.word-block:active {
+  transform: translateY(-3px) scale(0.98);
+}
+
+.word-block.selected {
+  background: linear-gradient(135deg, #5a9bc4, #3d6b8a);
+  color: white;
+  transform: scale(1.08);
+  box-shadow: 0 15px 40px rgba(90, 155, 196, 0.6),
+              0 0 50px rgba(90, 155, 196, 0.4);
+  animation: selectBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes selectBounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2) rotate(5deg); }
+  100% { transform: scale(1.08) rotate(0deg); }
+}
+
+.word-block.correct {
+  background: linear-gradient(135deg, #3d6b8a, #2a4a5e);
+  color: white;
+  animation: correctPop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 15px 40px rgba(61, 107, 138, 0.7),
+              0 0 70px rgba(61, 107, 138, 0.5);
+}
+
+@keyframes correctPop {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.25) rotate(8deg); }
+  60% { transform: scale(0.9) rotate(-8deg); }
+  100% { transform: scale(1.12) rotate(0deg); }
+}
+
+.word-block.wrong {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+  color: white;
+  animation: wrongShake 0.7s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  box-shadow: 0 15px 40px rgba(255, 107, 107, 0.7),
+              0 0 70px rgba(255, 107, 107, 0.5);
+}
+
+@keyframes wrongShake {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  10% { transform: translateX(-10px) rotate(-4deg); }
+  20% { transform: translateX(10px) rotate(4deg); }
+  30% { transform: translateX(-10px) rotate(-4deg); }
+  40% { transform: translateX(10px) rotate(4deg); }
+  50% { transform: translateX(-6px) rotate(-2deg); }
+  60% { transform: translateX(6px) rotate(2deg); }
+  70% { transform: translateX(-6px) rotate(-2deg); }
+  80% { transform: translateX(6px) rotate(2deg); }
+  90% { transform: translateX(-3px) rotate(0deg); }
+}
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.25);
+  border-top: 5px solid #5a9bc4;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  box-shadow: 0 0 30px rgba(90, 155, 196, 0.6);
+  z-index: 10;
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.result-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(20px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: modalFadeIn 0.5s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.result-content {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(40px);
+  border-radius: 36px;
+  padding: 50px 40px;
+  text-align: center;
+  max-width: 450px;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5),
+              0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+  animation: modalSlideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.result-content::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(90, 155, 196, 0.2), transparent);
+  animation: modalGlow 4s ease-in-out infinite;
+}
+
+@keyframes modalGlow {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(180deg); }
+}
+
+@keyframes modalSlideUp {
+  from { opacity: 0; transform: scale(0.85) translateY(40px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.result-content h2 {
+  font-size: 2.2em;
+  font-weight: 900;
+  color: white;
+  margin-bottom: 24px;
+  font-family: 'Poppins', sans-serif;
+  text-shadow: 0 5px 25px rgba(90, 155, 196, 0.6);
+  animation: resultTitlePop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes resultTitlePop {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
+}
+
+.result-score {
+  font-size: 3.5em;
+  font-weight: 900;
+  background: linear-gradient(135deg, #5a9bc4, #3d6b8a, #5a9bc4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  margin: 24px 0;
+  font-family: 'Poppins', sans-serif;
+  animation: scoreCount 1s ease-out 0.4s both, gradientShift 3s ease infinite;
+  filter: drop-shadow(0 5px 25px rgba(90, 155, 196, 0.6));
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes scoreCount {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.result-percentage {
+  font-size: 1.4em;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 800;
+  margin-bottom: 28px;
+  animation: percentageFade 0.7s ease-out 0.6s both;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes percentageFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.stars {
+  font-size: 2.8em;
+  margin: 28px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.star {
+  color: rgba(255, 255, 255, 0.25);
+  margin: 0 8px;
+  transition: all 0.5s ease;
+  display: inline-block;
+  filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.4));
+}
+
+.star.filled {
+  color: #ffd700;
+  animation: starPop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.9));
+}
+
+@keyframes starPop {
+  0% { transform: scale(0) rotate(0deg); }
+  50% { transform: scale(1.4) rotate(180deg); }
+  100% { transform: scale(1) rotate(360deg); }
+}
+
+.retry-btn {
+  background: linear-gradient(135deg, #5a9bc4, #3d6b8a);
+  color: white;
+  border: none;
+  padding: 18px 36px;
+  border-radius: 28px;
+  font-size: 17px;
+  font-weight: 900;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 30px rgba(90, 155, 196, 0.5);
+  animation: buttonFade 0.7s ease-out 0.8s both;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  z-index: 1;
+}background: linear-gradient(135deg, #8e4ec6, #6a3d8c);
+  color: white;
+  border: none;
+  padding: 18px 36px;
+  border-radius: 28px;
+  font-size: 17px;
+  font-weight: 900;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 30px rgba(142, 78, 198, 0.5);
+  animation: buttonFade 0.7s ease-out 0.8s both;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  z-index: 1;
+}.2, 1);
+  box-shadow: 0 10px 30px rgba(82, 217, 153, 0.5);
+  animation: buttonFade 0.7s ease-out 0.8s both;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  z-index: 1;
+}
+
+.retry-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 40px rgba(90, 155, 196, 0.7);
+}
+
+@keyframes buttonFade {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+  body { padding: 10px; }
+  .container { 
+    padding: 32px 24px; 
+    border-radius: 32px; 
+    max-width: 100%;
+  }
+  #uzbek-text { 
+    font-size: 1.3em;
+    line-height: 1.4;
+    margin-bottom: 20px;
+  }
+  .test-counter {
+    font-size: 15px;
+    padding: 14px 24px;
+  }
+  .level-badge {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+  .word-block { 
+    padding: 14px 22px; 
+    font-size: 15px;
+    min-width: 70px;
+  }
+  .back-btn { 
+    width: 150px; 
+    padding: 14px 24px;
+    font-size: 14px;
+  }
+  .drop-zone {
+    min-height: 100px;
+    padding: 20px;
+  }
+  .words-container {
+    padding: 24px 20px;
+  }
+  .words-grid {
+    gap: 12px;
+  }
+  .result-content { 
+    padding: 40px 28px; 
+    border-radius: 32px; 
+  }
+  .result-content h2 { 
+    font-size: 1.8em; 
+  }
+  .result-score { 
+    font-size: 2.8em; 
+  }
+  .result-percentage {
+    font-size: 1.2em;
+  }
+  .stars {
+    font-size: 2.4em;
+  }
+  .retry-btn {
+    padding: 16px 32px;
+    font-size: 16px;
+  }
+  #feedback {
+    font-size: 1em;
+    min-height: 40px;
+  }
+  .progress-bar {
+    height: 10px;
+    margin: 24px 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .container { 
+    padding: 28px 20px;
+    border-radius: 28px;
+  }
+  #uzbek-text {
+    font-size: 1.2em;
+  }
+  .test-counter {
+    font-size: 14px;
+    padding: 12px 20px;
+  }
+  .level-badge {
+    font-size: 10px;
+    padding: 5px 10px;
+    margin-left: 8px;
+  }
+  .words-grid { 
+    gap: 10px; 
+  }
+  .word-block { 
+    padding: 12px 18px; 
+    font-size: 14px; 
+    min-width: 65px; 
+  }
+  .drop-zone {
+    min-height: 90px;
+    padding: 18px;
+    gap: 10px;
+  }
+  .words-container {
+    padding: 20px 16px;
+  }
+  .back-btn {
+    width: 140px;
+    padding: 12px 20px;
+    font-size: 13px;
+  }
+  .result-content {
+    padding: 36px 24px;
+  }
+  .result-content h2 {
+    font-size: 1.6em;
+  }
+  .result-score {
+    font-size: 2.5em;
+  }
+  .result-percentage {
+    font-size: 1.1em;
+  }
+  .stars {
+    font-size: 2.2em;
+  }
+  .retry-btn {
+    padding: 14px 28px;
+    font-size: 15px;
+  }
+  #feedback {
+    font-size: 0.95em;
+  }
+}
+
+@media (max-width: 320px) {
+  .container {
+    padding: 24px 16px;
+    border-radius: 24px;
+  }
+  #uzbek-text {
+    font-size: 1.1em;
+  }
+  .test-counter {
+    font-size: 13px;
+    padding: 10px 18px;
+  }
+  .level-badge {
+    display: block;
+    margin: 8px auto 0;
+    font-size: 10px;
+  }
+  .word-block {
+    padding: 10px 16px;
+    font-size: 13px;
+    min-width: 60px;
+  }
+  .drop-zone {
+    min-height: 80px;
+    padding: 16px;
+  }
+  .words-grid {
+    gap: 8px;
+  }
+  .words-container {
+    padding: 18px 14px;
+  }
+  .back-btn {
+    width: 130px;
+    padding: 10px 18px;
+    font-size: 12px;
+  }
+  .result-content {
+    padding: 32px 20px;
+  }
+  .result-content h2 {
+    font-size: 1.5em;
+  }
+  .result-score {
+    font-size: 2.3em;
+  }
+  .result-percentage {
+    font-size: 1em;
+  }
+  .stars {
+    font-size: 2em;
+  }
+  .star {
+    margin: 0 4px;
+  }
+  .retry-btn {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+  #feedback {
+    font-size: 0.9em;
+  }
+  .progress-bar {
+    height: 8px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .container {
+    max-width: 90%;
+    padding: 38px 30px;
+  }
+  #uzbek-text {
+    font-size: 1.5em;
+  }
+  .word-block {
+    padding: 15px 26px;
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    max-width: 650px;
+    padding: 42px 34px;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+  .main-wrapper {
+    padding: 15px;
+  }
+  .container {
+    padding: 24px;
+  }
+  #uzbek-text {
+    font-size: 1.3em;
+    margin-bottom: 16px;
+  }
+  .test-counter {
+    padding: 12px 24px;
+    font-size: 15px;
+    margin-bottom: 16px;
+  }
+  .progress-bar {
+    margin: 16px 0;
+    height: 8px;
+  }
+  .drop-zone {
+    min-height: 80px;
+    padding: 16px;
+  }
+  .words-container {
+    padding: 20px;
+  }
+  .back-btn {
+    margin-bottom: 20px;
+  }
+  #feedback {
+    margin: 16px 0;
+    min-height: 35px;
+  }
+  .result-content {
+    padding: 30px 28px;
+  }
+  .result-content h2 {
+    font-size: 1.8em;
+    margin-bottom: 16px;
+  }
+  .result-score {
+    font-size: 2.8em;
+    margin: 16px 0;
+  }
+  .stars {
+    font-size: 2.2em;
+    margin: 16px 0;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="gradient-bg"></div>
+<div class="orbs-container">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  <div class="orb orb4"></div>
+</div>
+
+<div class="particles" id="particles"></div>
+
+<div class="main-wrapper">
+  <div class="container">
+    <div class="header">
+      <div class="test-counter">
+        Test <span id="currentTest">1</span> / 50
+        <span class="level-badge">CLAUSES OF REASON</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div id="uzbek-text">Yuklanmoqda...</div>
+      <div id="feedback"></div>
+    </div>
+
+    <button class="back-btn" onclick="window.history.back()">← Menyu</button>
+
+    <div class="drop-zone drop-zone-empty" id="dropZone"></div>
+    
+    <div class="words-container">
+      <div class="words-grid" id="wordsGrid"></div>
+    </div>
+  </div>
+</div>
+
+<div class="result-modal" id="resultModal">
+  <div class="result-content">
+    <h2>🎉 Test tugadi!</h2>
+    <div class="result-score" id="finalScore"></div>
+    <div class="result-percentage" id="finalPercentage"></div>
+    <div class="stars" id="stars"></div>
+    <button class="retry-btn" onclick="restartTest()">Qayta topshirish</button><br>
+    <button class="back-btn" onclick="window.history.back()" style="margin-top: 20px;">← Menyu</button>
+  </div>
+</div>
+
+<script>
+const tests = [
+  {uz: "Men uyda qoldim, chunki yomg'ir yog'ayapti", en: ["I", "stayed", "home", "because", "it", "was", "raining"]},
+  {uz: "U uxlab qoldi, sababi u juda charchagan edi", en: ["He", "fell", "asleep", "because", "he", "was", "very", "tired"]},
+  {uz: "Biz maktabga kechikdik, sababi avtobus kech keldi", en: ["We", "were", "late", "for", "school", "because", "the", "bus", "arrived", "late"]},
+  {uz: "Men darsga bora olmadim, sababi kasal edim", en: ["I", "couldn't", "go", "to", "class", "because", "I", "was", "sick"]},
+  {uz: "U kuldi, sababi hazil juda qiziq edi", en: ["She", "laughed", "because", "the", "joke", "was", "very", "funny"]},
+  {uz: "Biz o'yin o'tkazmadik, yomg'ir yog'ayotgani sababli", en: ["We", "didn't", "play", "because", "it", "was", "raining"]},
+  {uz: "Men darsni tushundim, sababi o'qituvchi yaxshi tushuntirdi", en: ["I", "understood", "the", "lesson", "because", "the", "teacher", "explained", "well"]},
+  {uz: "U uxlab qoldi, sababi kechasi ishlagan edi", en: ["He", "fell", "asleep", "because", "he", "worked", "at", "night"]},
+  {uz: "Men uyda qoldim, sababi sovuq edi", en: ["I", "stayed", "home", "because", "it", "was", "cold"]},
+  {uz: "U keldi, sababi muhim xabar bor edi", en: ["He", "came", "because", "he", "had", "important", "news"]},
+
+  {uz: "Men ertaroq yotdim, sababi charchagan edim", en: ["I", "went", "to", "bed", "early", "as", "I", "was", "tired"]},
+  {uz: "U chiqdi, sababi havoni yoqtirmadi", en: ["She", "left", "as", "she", "didn't", "like", "the", "weather"]},
+  {uz: "Biz ketdik, sababi film zerikarli edi", en: ["We", "left", "as", "the", "movie", "was", "boring"]},
+  {uz: "Men u bilan gaplashmadim, sababi u band edi", en: ["I", "didn't", "talk", "to", "him", "as", "he", "was", "busy"]},
+  {uz: "U kuldi, sababi u xursand edi", en: ["He", "smiled", "as", "he", "was", "happy"]},
+  {uz: "Biz dam oldik, sababi dars tugagan edi", en: ["We", "rested", "as", "the", "lesson", "was", "over"]},
+  {uz: "Men tez yurdim, sababi kech qolayotgan edim", en: ["I", "walked", "fast", "as", "I", "was", "late"]},
+  {uz: "U yig'ladi, sababi film qayg'uli edi", en: ["She", "cried", "as", "the", "movie", "was", "sad"]},
+  {uz: "Biz kutdik, sababi u kelishini bilardik", en: ["We", "waited", "as", "we", "knew", "he", "would", "come"]},
+  {uz: "Men choy ichdim, sababi sovuq edim", en: ["I", "drank", "tea", "as", "I", "was", "cold"]},
+
+  {uz: "U dam oldi, sababi u charchagan edi", en: ["He", "rested", "since", "he", "was", "tired"]},
+  {uz: "Men kech qoldim, sababi avtobus kechikdi", en: ["I", "was", "late", "since", "the", "bus", "was", "late"]},
+  {uz: "Biz chiqmadik, sababi yomg'ir yog'ayapti", en: ["We", "didn't", "go", "out", "since", "it", "was", "raining"]},
+  {uz: "U kulmadi, sababi u xafa edi", en: ["She", "didn't", "smile", "since", "she", "was", "sad"]},
+  {uz: "Men o'qimadim, sababi charchagan edim", en: ["I", "didn't", "study", "since", "I", "was", "tired"]},
+  {uz: "U uxlab qoldi, sababi u kechasi uyg'oq edi", en: ["He", "fell", "asleep", "since", "he", "was", "awake", "all", "night"]},
+  {uz: "Biz ovqat tayyorlamadik, sababi vaqt yo'q edi", en: ["We", "didn't", "cook", "since", "there", "was", "no", "time"]},
+  {uz: "Men uydan chiqdim, sababi ishga ketayotgan edim", en: ["I", "left", "home", "since", "I", "was", "going", "to", "work"]},
+  {uz: "U keldi, sababi u yordam bermoqchi edi", en: ["He", "came", "since", "he", "wanted", "to", "help"]},
+  {uz: "Biz dam oldik, sababi ish tugadi", en: ["We", "rested", "since", "the", "work", "was", "done"]},
+
+  {uz: "U o'yin bekor qilindi, yomg'ir tufayli", en: ["The", "game", "was", "canceled", "because", "of", "the", "rain"]},
+  {uz: "Men uydan chiqa olmadim, sovuq tufayli", en: ["I", "couldn't", "go", "out", "because", "of", "the", "cold"]},
+  {uz: "Biz kech qoldik, tirbandlik sababli", en: ["We", "were", "late", "because", "of", "the", "traffic", "jam"]},
+  {uz: "U uxlab qoldi, charchoq tufayli", en: ["He", "fell", "asleep", "because", "of", "tiredness"]},
+  {uz: "Men o'qiy olmadim, shovqin tufayli", en: ["I", "couldn't", "study", "because", "of", "the", "noise"]},
+  {uz: "Biz o'yin o'tkazmadik, yomg'ir tufayli", en: ["We", "didn't", "play", "because", "of", "the", "rain"]},
+  {uz: "U chiqib ketdi, salomatligi sababli", en: ["He", "left", "because", "of", "his", "health"]},
+  {uz: "Men kechikdim, avtobus kech kelgani sababli", en: ["I", "was", "late", "because", "of", "the", "bus", "delay"]},
+  {uz: "U yig'ladi, xafalik tufayli", en: ["She", "cried", "because", "of", "sadness"]},
+  {uz: "Biz dam oldik, charchoq tufayli", en: ["We", "rested", "because", "of", "tiredness"]},
+
+  {uz: "Parvoz bekor qilindi, kuchli shamol sababli", en: ["The", "flight", "was", "canceled", "due", "to", "strong", "wind"]},
+  {uz: "U ishga kech qoldi, yo'l tirbandligi sababli", en: ["He", "was", "late", "for", "work", "due", "to", "heavy", "traffic"]},
+  {uz: "Men maktabga bora olmadim, kasallik sababli", en: ["I", "couldn't", "go", "to", "school", "due", "to", "illness"]},
+  {uz: "U mashg'ulotni o'tkazmadi, charchoq sababli", en: ["She", "missed", "the", "training", "due", "to", "tiredness"]},
+  {uz: "Biz ko'chaga chiqmadi, yomg'ir sababli", en: ["We", "didn't", "go", "outside", "due", "to", "rain"]},
+  {uz: "Men darsga kech qoldim, avtobus sababli", en: ["I", "was", "late", "for", "class", "due", "to", "the", "bus"]},
+  {uz: "U yig'lashni to'xtatdi, do'stining so'zi tufayli", en: ["She", "stopped", "crying", "due", "to", "her", "friend's", "words"]},
+  {uz: "Biz o'yin bekor qildik, yomg'ir sababli", en: ["We", "canceled", "the", "game", "due", "to", "rain"]},
+  {uz: "U uyda qoldi, shamollash sababli", en: ["He", "stayed", "home", "due", "to", "a", "cold"]},
+  {uz: "Men dam oldim, charchoq sababli", en: ["I", "rested", "due", "to", "tiredness"]},
+
+  {uz: "Biz g'alaba qozondik, sizning yordamingiz tufayli", en: ["We", "won", "thanks", "to", "your", "help"]},
+  {uz: "U muvaffaqiyatga erishdi, do'stlarining yordami tufayli", en: ["He", "succeeded", "thanks", "to", "his", "friends'", "help"]},
+  {uz: "Men testdan o'tdim, tayyorgarlik tufayli", en: ["I", "passed", "the", "test", "thanks", "to", "my", "preparation"]},
+  {uz: "Biz vaqtida yetib keldik, taksi tufayli", en: ["We", "arrived", "on", "time", "thanks", "to", "the", "taxi"]},
+  {uz: "U yaxshi baho oldi, ko'p o'qigani tufayli", en: ["She", "got", "a", "good", "grade", "thanks", "to", "her", "hard", "work"]},
+  {uz: "Men loyihani tugatdim, jamoam tufayli", en: ["I", "finished", "the", "project", "thanks", "to", "my", "team"]},
+  {uz: "U mashhur bo'ldi, iste'dodi tufayli", en: ["He", "became", "famous", "thanks", "to", "his", "talent"]},
+  {uz: "Biz muvaffaqiyatga erishdik, rahbarimiz tufayli", en: ["We", "succeeded", "thanks", "to", "our", "leader"]},
+  {uz: "U ingliz tilini o'rgandi, o'qituvchisi tufayli", en: ["He", "learned", "English", "thanks", "to", "his", "teacher"]},
+  {uz: "Men yangi do'st topdim, kurs tufayli", en: ["I", "found", "a", "new", "friend", "thanks", "to", "the", "course"]}
+];
+
+let currentTest = 0;
+let score = 0;
+let totalWords = 0;
+let isChecking = false;
+let selectedWords = [];
+let currentCorrectSentence = '';
+let voices = [];
+let audioInitialized = false;
+
+function createParticles() {
+  const particlesContainer = document.getElementById('particles');
+  for (let i = 0; i < 15; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.width = Math.random() * 4 + 2 + 'px';
+    particle.style.height = particle.style.width;
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDelay = Math.random() * 15 + 's';
+    particle.style.animationDuration = Math.random() * 10 + 10 + 's';
+    particlesContainer.appendChild(particle);
+  }
+}
+
+function loadVoices() {
+  return new Promise((resolve) => {
+    voices = speechSynthesis.getVoices();
+    if (voices.length > 0) {
+      resolve();
+    } else {
+      speechSynthesis.onvoiceschanged = () => {
+        voices = speechSynthesis.getVoices();
+        resolve();
+      };
+      setTimeout(resolve, 1000);
+    }
+  });
+}
+
+function detectLang(text) {
+  if (/[a-z]/i.test(text)) return "en-US";
+  return "uz-UZ";
+}
+
+function speakText(text) {
+  return new Promise((resolve) => {
+    speechSynthesis.cancel();
+    
+    setTimeout(() => {
+      const utterance = new SpeechSynthesisUtterance(text);
+      const lang = detectLang(text);
+      utterance.lang = lang;
+      utterance.pitch = 1.0;
+      utterance.rate = 0.85;
+      utterance.volume = 1;
+      
+      const voiceLang = lang.split('-')[0];
+      const voice = voices.find(v => v.lang.startsWith(voiceLang)) || 
+                    voices.find(v => v.lang.includes(voiceLang));
+      if (voice) utterance.voice = voice;
+      
+      utterance.onend = () => {
+        setTimeout(resolve, 100);
+      };
+      utterance.onerror = () => {
+        resolve();
+      };
+      
+      speechSynthesis.speak(utterance);
+    }, 150);
+  });
+}
+
+async function init() {
+  createParticles();
+  await loadVoices();
+  loadTest();
+}
+
+function loadTest() {
+  if (currentTest >= tests.length) { 
+    showFinalResult(); 
+    return; 
+  }
+  
+  const test = tests[currentTest];
+  currentCorrectSentence = test.en.join(' ');
+  document.getElementById('uzbek-text').textContent = test.uz;
+  document.getElementById('currentTest').textContent = currentTest + 1;
+  document.getElementById('progressFill').style.width = ((currentTest / tests.length) * 100) + '%';
+  document.getElementById('feedback').textContent = '';
+  selectedWords = [];
+  isChecking = false;
+  
+  const dropZone = document.getElementById('dropZone');
+  const wordsGrid = document.getElementById('wordsGrid');
+  dropZone.innerHTML = '';
+  dropZone.classList.add('drop-zone-empty');
+  wordsGrid.innerHTML = '';
+  
+  const shuffledWords = [...test.en].sort(() => Math.random() - 0.5);
+  shuffledWords.forEach((word, index) => {
+    const wordDiv = document.createElement('div');
+    wordDiv.className = 'word-block';
+    wordDiv.textContent = word;
+    wordDiv.style.animationDelay = (index * 0.05) + 's';
+    wordDiv.onclick = () => selectWord(wordDiv, word);
+    wordsGrid.appendChild(wordDiv);
+  });
+}
+
+function selectWord(wordElement, word) {
+  if (isChecking) return;
+  if (navigator.vibrate) navigator.vibrate(30);
+  
+  if (selectedWords.includes(word)) { 
+    removeWord(word); 
+    return; 
+  }
+  
+  selectedWords.push(word);
+  const dropZone = document.getElementById('dropZone');
+  const wordCopy = document.createElement('div');
+  wordCopy.className = 'word-block selected';
+  wordCopy.textContent = word;
+  wordCopy.onclick = () => removeWord(word);
+  dropZone.appendChild(wordCopy);
+  dropZone.classList.remove('drop-zone-empty');
+  
+  wordElement.style.opacity = '0.3';
+  wordElement.style.pointerEvents = 'none';
+  
+  const correctOrder = tests[currentTest].en;
+  if (selectedWords.length === correctOrder.length) { 
+    setTimeout(checkAnswer, 500); 
+  }
+}
+
+function removeWord(word) {
+  if (isChecking) return;
+  if (navigator.vibrate) navigator.vibrate(30);
+  
+  const index = selectedWords.indexOf(word);
+  if (index > -1) selectedWords.splice(index, 1);
+  
+  const dropZone = document.getElementById('dropZone');
+  const dropWords = dropZone.querySelectorAll('.word-block');
+  dropWords.forEach(el => { 
+    if (el.textContent === word) el.remove(); 
+  });
+  
+  if (selectedWords.length === 0) dropZone.classList.add('drop-zone-empty');
+  
+  const wordsGrid = document.getElementById('wordsGrid');
+  const originalWords = wordsGrid.querySelectorAll('.word-block');
+  originalWords.forEach(el => { 
+    if (el.textContent === word) { 
+      el.style.opacity = '1'; 
+      el.style.pointerEvents = 'auto'; 
+    } 
+  });
+}
+
+function checkAnswer() {
+  if (isChecking) return;
+  isChecking = true;
+  
+  const dropZone = document.getElementById('dropZone');
+  const loading = document.createElement('div');
+  loading.className = 'loading';
+  dropZone.appendChild(loading);
+  
+  setTimeout(() => {
+    loading.remove();
+    const correctOrder = tests[currentTest].en;
+    let correctWords = 0;
+    const dropWords = Array.from(dropZone.querySelectorAll('.word-block')).filter(el => !el.classList.contains('loading'));
+    
+    dropWords.forEach((el, index) => {
+      setTimeout(() => {
+        if (el.textContent === correctOrder[index]) { 
+          el.className = 'word-block correct'; 
+          correctWords++; 
+        } else { 
+          el.className = 'word-block wrong'; 
+        }
+        if (navigator.vibrate) navigator.vibrate(20);
+      }, index * 100);
+    });
+    
+    setTimeout(async () => {
+      const isCorrect = correctWords === correctOrder.length && selectedWords.length === correctOrder.length;
+      const feedback = document.getElementById('feedback');
+      
+      if (isCorrect) {
+        feedback.textContent = "🎉 Ajoyib! Keyingisiga o'tamiz!";
+        feedback.style.color = '#5a9bc4';
+        score += correctOrder.length;
+        if (navigator.vibrate) navigator.vibrate([80, 40, 80]);
+        
+        const correctSentence = correctOrder.join(' ');
+        await speakText(correctSentence);
+        
+        setTimeout(() => { 
+          currentTest++; 
+          loadTest(); 
+        }, 700);
+      } else {
+        feedback.textContent = `❌ Xato! ${correctWords}/${correctOrder.length} to'g'ri. Qayta urinib ko'ring`;
+        feedback.style.color = '#ff6b6b';
+        if (navigator.vibrate) navigator.vibrate([150, 70, 150]);
+        
+        setTimeout(() => { 
+          loadTest(); 
+        }, 1600);
+      }
+      totalWords += correctOrder.length;
+    }, dropWords.length * 100 + 400);
+  }, 800);
+}
+
+function showFinalResult() {
+  const percentage = totalWords === 0 ? 0 : Math.round((score / totalWords) * 100);
+  let starCount = 0;
+  if (percentage >= 90) starCount = 5;
+  else if (percentage >= 80) starCount = 4;
+  else if (percentage >= 70) starCount = 3;
+  else if (percentage >= 60) starCount = 2;
+  else if (percentage >= 50) starCount = 1;
+  
+  document.getElementById('finalScore').textContent = `${score}/${totalWords}`;
+  document.getElementById('finalPercentage').textContent = `${percentage}% to'g'ri javob`;
+  
+  const starsEl = document.getElementById('stars');
+  starsEl.innerHTML = '';
+  for (let i = 0; i < 5; i++) {
+    const star = document.createElement('span');
+    star.className = 'star'; 
+    star.textContent = '⭐';
+    if (i < starCount) {
+      setTimeout(() => { 
+        star.classList.add('filled'); 
+        if (navigator.vibrate) navigator.vibrate(40); 
+      }, i * 150);
+    }
+    starsEl.appendChild(star);
+  }
+  
+  document.getElementById('resultModal').style.display = 'flex';
+  if (navigator.vibrate) { 
+    setTimeout(() => { 
+      navigator.vibrate([200, 100, 200]); 
+    }, 600); 
+  }
+}
+
+function restartTest() {
+  currentTest = 0; 
+  score = 0; 
+  totalWords = 0; 
+  selectedWords = []; 
+  document.getElementById('resultModal').style.display = 'none'; 
+  loadTest();
+}
+
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function (event) {
+  const now = (new Date()).getTime();
+  if (now - lastTouchEnd <= 300) event.preventDefault();
+  lastTouchEnd = now;
+}, false);
+
+document.addEventListener('contextmenu', function(e) { 
+  e.preventDefault(); 
+});
+
+window.addEventListener('DOMContentLoaded', init);
+
+document.addEventListener('touchstart', function initAudio() {
+  if (!audioInitialized) {
+    audioInitialized = true;
+    loadVoices();
+    const utterance = new SpeechSynthesisUtterance('');
+    utterance.volume = 0;
+    speechSynthesis.speak(utterance);
+  }
+}, { once: true });
+
+document.addEventListener('click', function initAudio() {
+  if (!audioInitialized) {
+    audioInitialized = true;
+    loadVoices();
+  }
+}, { once: true });
+</script>
+</body>
+</html>
