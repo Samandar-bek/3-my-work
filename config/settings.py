@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'home', 
 ]
 
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -56,7 +58,12 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "templates"],  # Umumiy templates uchun papka
+        'DIRS': [
+    BASE_DIR / 'templates',
+    BASE_DIR  # bu templates tashqarisidagi fayllarni ham qidiradi
+],
+  # Umumiy templates uchun papka
+        
         'APP_DIRS': True,  # App ichidagi templates qidirish uchun
         'OPTIONS': {
             'context_processors': [

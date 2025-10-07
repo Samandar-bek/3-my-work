@@ -54,3 +54,23 @@ def future_perfect_hard(request): return render(request, 'future_perfect_hard.ht
 def future_perfect_cont_easy(request): return render(request, 'future_perfect_cont_easy.html')
 def future_perfect_cont_normal(request): return render(request, 'future_perfect_cont_normal.html')
 def future_perfect_cont_hard(request): return render(request, 'future_perfect_cont_hard.html')
+
+def clauses_reason(request):return render(request, 'clauses-reason.html')
+
+def clauses_reason(request):
+    return render(request, 'clauses-reason.html')
+def clauses_contrast(request):
+    return render(request, 'clauses-contrast.html')
+
+
+def clauses_purpose(request):
+    return render(request, 'clauses-purpose.html')
+
+def clauses_result(request):
+    return render(request, 'clauses-result.html')
+
+def conditionals(request):
+    return render(request, 'conditionals.html')
+
+from django.conf import settings
+from django.conf.urls.static import static

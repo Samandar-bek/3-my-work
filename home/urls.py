@@ -52,7 +52,12 @@ urlpatterns = [
     path('future_perfect_normal.html', views.future_perfect_normal, name='future_perfect_normal'),
     path('future_perfect_hard.html', views.future_perfect_hard, name='future_perfect_hard'),
 
+    path('clauses-reason.html', views.clauses_reason, name='clauses_reason'),
+    path('clauses-purpose.html', views.clauses_purpose, name='clauses_purpose'),
     path('future_perfect_cont_easy.html', views.future_perfect_cont_easy, name='future_perfect_cont_easy'),
     path('future_perfect_cont_normal.html', views.future_perfect_cont_normal, name='future_perfect_cont_normal'),
     path('future_perfect_cont_hard.html', views.future_perfect_cont_hard, name='future_perfect_cont_hard'),
+    path('clauses-result.html', views.clauses_result, name='clauses_result'),
+    path('clauses-contrast.html', views.clauses_contrast, name='clauses_contrast'),
+    path('conditionals.html', views.conditionals, name='conditionals'),
 ]
